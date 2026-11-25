@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Roberto Valiente (roberto.valiente@uah.es)">
+
+<title>1.1. Introducción al lenguaje de programación Python</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="01-01_introduccion_python_files/libs/clipboard/clipboard.min.js"></script>
+<script src="01-01_introduccion_python_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="01-01_introduccion_python_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="01-01_introduccion_python_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="01-01_introduccion_python_files/libs/quarto-html/popper.min.js"></script>
+<script src="01-01_introduccion_python_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="01-01_introduccion_python_files/libs/quarto-html/anchor.min.js"></script>
+<link href="01-01_introduccion_python_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="01-01_introduccion_python_files/libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="01-01_introduccion_python_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="01-01_introduccion_python_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="01-01_introduccion_python_files/libs/bootstrap/bootstrap-9e3ffae467580fdb927a41352e75a2e0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<style>
+
+      .quarto-title-block .quarto-title-banner h1,
+      .quarto-title-block .quarto-title-banner h2,
+      .quarto-title-block .quarto-title-banner h3,
+      .quarto-title-block .quarto-title-banner h4,
+      .quarto-title-block .quarto-title-banner h5,
+      .quarto-title-block .quarto-title-banner h6
+      {
+        color: #ffffff;
+      }
+
+      .quarto-title-block .quarto-title-banner {
+        color: #ffffff;
+      }
+</style>
+
+
+</head>
+
+<body class="quarto-light">
+
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">1.1. Introducción al lenguaje de programación Python</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Roberto Valiente (<a href="mailto:roberto.valiente@uah.es">roberto.valiente@uah.es</a>) </p>
+            </div>
+    </div>
+      
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#qué-es-python-por-qué-python" id="toc-qué-es-python-por-qué-python" class="nav-link active" data-scroll-target="#qué-es-python-por-qué-python"><span class="header-section-number">1</span> ¿Qué es Python? ¿Por qué Python?</a></li>
+  <li><a href="#repasando-los-conceptos-básicos-de-programación" id="toc-repasando-los-conceptos-básicos-de-programación" class="nav-link" data-scroll-target="#repasando-los-conceptos-básicos-de-programación"><span class="header-section-number">2</span> Repasando los conceptos básicos de programación</a>
+  <ul class="collapse">
+  <li><a href="#elementos-de-código-y-ejecución" id="toc-elementos-de-código-y-ejecución" class="nav-link" data-scroll-target="#elementos-de-código-y-ejecución"><span class="header-section-number">2.1</span> Elementos de código y ejecución</a></li>
+  <li><a href="#herramientas-y-entorno-de-desarrollo" id="toc-herramientas-y-entorno-de-desarrollo" class="nav-link" data-scroll-target="#herramientas-y-entorno-de-desarrollo"><span class="header-section-number">2.2</span> Herramientas y entorno de desarrollo</a></li>
+  <li><a href="#depuración-y-análisis" id="toc-depuración-y-análisis" class="nav-link" data-scroll-target="#depuración-y-análisis"><span class="header-section-number">2.3</span> Depuración y análisis</a></li>
+  </ul></li>
+  <li><a href="#recordando-los-principios-generales-de-programación." id="toc-recordando-los-principios-generales-de-programación." class="nav-link" data-scroll-target="#recordando-los-principios-generales-de-programación."><span class="header-section-number">3</span> Recordando los principios generales de programación.</a></li>
+  <li><a href="#desarrollo-y-uso-de-python-psf-y-pep" id="toc-desarrollo-y-uso-de-python-psf-y-pep" class="nav-link" data-scroll-target="#desarrollo-y-uso-de-python-psf-y-pep"><span class="header-section-number">4</span> Desarrollo y uso de Python: PSF y PEP</a>
+  <ul class="collapse">
+  <li><a href="#python-software-foundation" id="toc-python-software-foundation" class="nav-link" data-scroll-target="#python-software-foundation"><span class="header-section-number">4.1</span> Python Software Foundation</a></li>
+  <li><a href="#python-enhancement-proposals-peps" id="toc-python-enhancement-proposals-peps" class="nav-link" data-scroll-target="#python-enhancement-proposals-peps"><span class="header-section-number">4.2</span> Python Enhancement Proposals (PEPs)</a></li>
+  </ul></li>
+  <li><a href="#ide-spyder" id="toc-ide-spyder" class="nav-link" data-scroll-target="#ide-spyder"><span class="header-section-number">5</span> IDE: Spyder</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<table class="caption-top table">
+<colgroup>
+<col style="width: 65%">
+<col style="width: 34%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><strong>Fundamentos de Programación TIG</strong> <br> Máster en Tecnologías de la Información Geográfica (TIG) Universidad de Alcalá</td>
+<td style="text-align: right;"><img src="images/UAH-cabecera.png" class="img-fluid"></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p><br> <br></p>
+<section id="qué-es-python-por-qué-python" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="qué-es-python-por-qué-python"><span class="header-section-number">1</span> ¿Qué es Python? ¿Por qué Python?</h2>
+<p>Python es en la actualidad uno de los lenguajes de programación más usados del mundo. Según el ranking RedMonk de lenguajes de programación en 2026 (<a href="https://redmonk.com/sogrady/2026/04/14/language-rankings-1-26/">O’Grady</a>), Python fue el segundo lenguaje de programación más usado en volumen de proyectos y comentarios en el foro <a href="https://stackoverflow.com/questions">StackOverflow</a>.</p>
+<div id="fig-01_003" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-cap="Ranking RedMonk de lenguajes de programación (2026)." data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-01_003-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/fig_01_003.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:75.0%" data-fig-cap="Ranking RedMonk de lenguajes de programación (2026).">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-01_003-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Ranking RedMonk de lenguajes de programación (2026)
+</figcaption>
+</figure>
+</div>
+<p>La gran popularidad de Python se debe, en buena medida, a las características que lo convierten en un lenguaje versátil y accesible para diferentes tipos de usuarios y aplicaciones. Python es un lenguaje de programación de <strong>código abierto</strong> (<em>open source</em>), cuyo desarrollo está respaldado por una comunidad internacional de programadores, investigadores, voluntarios, empresas y organizaciones. Esto favorece su evolución continua y permite que cualquier persona pueda utilizarlo, desarrollar aplicaciones y contribuir a ampliar sus funcionalidades.</p>
+<p>Python es, además, un lenguaje de programación <strong>multipropósito</strong>, <strong>interpretado</strong>, de <strong>alto nivel</strong> y <strong>multiparadigma</strong>. Veamos qué significa cada una de estas características.</p>
+<p><br></p>
+<p><strong>Lenguaje multipropósito</strong></p>
+<p>Python es un lenguaje multipropósito porque puede utilizarse para desarrollar aplicaciones muy diversas, desde pequeños scripts para automatizar tareas hasta sistemas complejos de análisis de datos o aplicaciones web. Entre sus principales ámbitos de aplicación destacan:</p>
+<ul>
+<li><p><em>Análisis de datos y aprendizaje automático (Machine Learning)</em>: permite realizar procesos de preparación y transformación de datos (data wrangling), cálculos estadísticos, visualización de información y desarrollo de algoritmos de aprendizaje automático e inteligencia artificial.</p></li>
+<li><p><em>Análisis geoespacial</em>: dispone de un amplio ecosistema de bibliotecas para el tratamiento y análisis de información geográfica. Además, está integrado en herramientas SIG de uso habitual, como QGIS (PyQGIS) y ArcGIS (ArcPy), lo que permite automatizar procesos y desarrollar análisis espaciales complejos. Esto lo trabajaremos en el tema 4.</p></li>
+<li><p><em>Automatización de tareas (scripting)</em>: facilita la automatización de procesos repetitivos, la gestión de archivos, la descarga y transformación de datos y la ejecución de flujos de trabajo.</p></li>
+<li><p><em>Desarrollo web y de software:</em> permite desarrollar la parte interna (back-end) de sitios web y aplicaciones mediante herramientas como Django o Flask. Estas tecnologías facilitan el procesamiento de datos en servidores, la comunicación con bases de datos y la gestión de las peticiones de los usuarios. Un ejemplo de aplicación web cartográfica enteramente desarrollada con Python es <a href="https://creshmap.com/">CRESHMap</a>.</p></li>
+<li><p><em>Big Data</em>: puede utilizarse para procesar y analizar grandes volúmenes de información, especialmente mediante bibliotecas y herramientas especializadas que permiten distribuir o acelerar los cálculos.</p>
+<p><br></p></li>
+</ul>
+<p><strong>Lenguaje interpretado</strong></p>
+<p>Python es un lenguaje interpretado, lo que significa que su código fuente no necesita ser compilado previamente por el usuario en un ejecutable independiente para poder ejecutarse. La compilación es el proceso mediante el cual el código escrito en un lenguaje de programación se traduce a otro formato que el ordenador puede ejecutar o procesar de forma más directa, normalmente código máquina o código intermedio. Python cuenta con un <strong>intérprete</strong> que procesa directametne el código y ejecuta las instrucciones a través de su entorno de ejecución.</p>
+<p>Esta característica ofrece algunas ventajas:</p>
+<ul>
+<li><p><em>Interactividad</em>: permite ejecutar instrucciones de forma individual y comprobar inmediatamente sus resultados, por ejemplo, desde una consola interactiva como IPython.</p></li>
+<li><p><em>Retroalimentación inmediata (feedback)</em>: facilita probar fragmentos de código y observar los resultados sin necesidad de ejecutar un programa completo.</p></li>
+<li><p><em>Detección de errores durante la ejecución</em>: los errores que se producen al ejecutar una instrucción pueden identificarse en ese momento, lo que facilita el proceso de desarrollo y depuración.</p></li>
+</ul>
+<p>Este funcionamiento es similar al que encontramos en R, que también permite trabajar de forma interactiva desde una consola.</p>
+<p><br></p>
+<p><strong>Lenguaje de alto nivel</strong></p>
+<p>Python es un lenguaje de alto nivel porque su sintaxis está diseñada para resultar relativamente sencilla, legible y cercana a la forma en que las personas expresamos las instrucciones. A diferencia de los lenguajes de bajo nivel, no es necesario gestionar directamente muchos de los detalles internos del funcionamiento del ordenador.</p>
+<p>Entre sus principales características destacan:</p>
+<ul>
+<li><p><em>Simplicidad sintáctica</em>: utiliza una sintaxis relativamente sencilla y reduce la cantidad de código necesaria para realizar determinadas operaciones.</p></li>
+<li><p><em>Legibilidad</em>: su estructura y convenciones favorecen que el código sea fácil de leer, comprender y mantener.</p></li>
+<li><p><em>Abstracción</em>: muchos aspectos del funcionamiento interno del sistema, como la gestión de memoria, están automatizados y no necesitan ser controlados directamente por el programador.</p></li>
+</ul>
+<p>Al igual que R, Python es un lenguaje de alto nivel, lo que facilita su aprendizaje y permite centrarse en la resolución de problemas sin tener que gestionar numerosos detalles técnicos del ordenador.</p>
+<p><br></p>
+<p><strong>Lenguaje multiparadigma</strong></p>
+<p>Python es un lenguaje multiparadigma porque permite desarrollar programas siguiendo diferentes enfoques o estilos de programación. Los tres paradigmas más relevantes son:</p>
+<ul>
+<li><p><em>Programación procedimental</em>: organiza el código como una secuencia de instrucciones y funciones que realizan operaciones sobre los datos. El programa se construye a partir de una serie de pasos que permiten resolver un problema.</p></li>
+<li><p><em>Programación orientada a objetos (POO)</em>: organiza el código en torno a objetos que combinan datos (atributos) y comportamientos (métodos). Los objetos representan entidades con características y operaciones propias.</p></li>
+<li><p><em>Programación funcional</em>: se basa en el uso de funciones como elementos centrales del programa. Favorece la utilización de funciones que reciben datos y devuelven resultados, evitando modificar innecesariamente el estado de los objetos o del programa.</p></li>
+</ul>
+<p>Aunque Python permite utilizar los tres paradigmas y combinarlos en un mismo programa, ofrece un soporte destacado para la programación orientada a objetos. Por su parte, R también es un lenguaje multiparadigma, aunque en el análisis de datos es habitual encontrar un estilo de programación más próximo al paradigma funcional, especialmente cuando se trabaja con funciones encadenadas para transformar y analizar información.</p>
+<p><br></p>
+<p><strong>Otras características de Python</strong></p>
+<p>Además de las anteriores, existen otras características que contribuyen a explicar la popularidad y utilidad de Python:</p>
+<ul>
+<li><p><em>Multiplataforma</em>: es compatible con los principales sistemas operativos (Windows, macOS y Linux), por lo que permite desarrollar y ejecutar código en diferentes entornos.</p></li>
+<li><p><em>Amplio soporte y comunidad</em>: al ser un lenguaje de código abierto, cuenta con una comunidad internacional muy activa, abundantes recursos de aprendizaje, documentación y foros de consulta.</p></li>
+<li><p>«<em>Pilas incluidas</em>» (<em>batteries included</em>): dispone de una biblioteca estándar con numerosas herramientas incorporadas para realizar tareas habituales. Además, cuenta con un amplio ecosistema de bibliotecas y paquetes desarrollados por terceros que permiten ampliar sus funcionalidades.</p></li>
+<li><p><em>Escalabilidad</em>: puede utilizarse tanto para desarrollar pequeños scripts como para construir aplicaciones y flujos de trabajo complejos. Además, dispone de herramientas especializadas para trabajar con grandes volúmenes de datos y distribuir los cálculos.</p></li>
+<li><p><em>Flexibilidad e interoperabilidad</em>: permite integrarse con otros lenguajes de programación y tecnologías, lo que facilita combinar diferentes herramientas y aprovechar sus respectivas ventajas.</p></li>
+</ul>
+<p>La siguiente figura resume e ilustra las principales características de Python y algunos de los motivos por los que se ha convertido en uno de los lenguajes de programación más utilizados en ámbitos como la ciencia, la investigación y las tecnologías de la información geográfica.</p>
+<div id="fig-01_004" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-cap="¿Por qué utilizar Python?" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-01_004-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/fig_01_004.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%" data-fig-cap="¿Por qué utilizar Python?">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-01_004-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: ¿Por qué utilizar Python?
+</figcaption>
+</figure>
+</div>
+<p><br></p>
+</section>
+<section id="repasando-los-conceptos-básicos-de-programación" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="repasando-los-conceptos-básicos-de-programación"><span class="header-section-number">2</span> Repasando los conceptos básicos de programación</h2>
+<p>Antes de empezar a trabajar con Python, conviene repasar algunos conceptos básicos de programación que utilizaremos a lo largo de la asignatura. Aunque algunos términos pueden resultar familiares por vuestra experiencia previa con otros lenguajes, es importante tener claras sus diferencias y comprender cómo se relacionan entre sí. Este repaso nos servirá para establecer una base común y facilitar la comprensión de los contenidos que iremos desarrollando en los siguientes temas.</p>
+<p><br></p>
+<section id="elementos-de-código-y-ejecución" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="elementos-de-código-y-ejecución"><span class="header-section-number">2.1</span> Elementos de código y ejecución</h3>
+<p>En este apartado repasaremos los principales elementos que intervienen en la escritura y organización del código Python, desde las instrucciones individuales hasta los programas completos. También veremos cómo se relacionan conceptos como script, módulo, paquete, librería, función, método, clase y objeto, que utilizaremos habitualmente a lo largo de la asignatura.</p>
+<p>Principales definiciones:</p>
+<ul>
+<li><p><strong>Programa</strong>: Conjunto completo de instrucciones que resuelven un problema o automatizan una tarea. Ejemplo: un programa que descarga datos, los limpia y genera un mapa.</p></li>
+<li><p><strong>Código</strong>: Conjunto de instrucciones escritas en Python que ejecutan una tarea. Es la “materia prima” de un programa. Concepto general (escrito dentro de un programa, módulo, script o función).</p></li>
+<li><p><strong>Script</strong>: Archivo de texto con extensión .py que contiene código Python que puede ejecutarse.</p></li>
+<li><p><strong>Módulo</strong>: Archivo .py que contiene funciones, clases o variables y se puede importar en otros programas.</p></li>
+<li><p><strong>Paquete</strong>: Conjunto de módulos ya desarrollados que extienden las capacidades de Python.</p></li>
+<li><p><strong>Librería / Biblioteca</strong>: Una colección de paquetes.</p></li>
+</ul>
+<p><br></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Diferencia entre módulo, paquete y librería</strong></p>
+<div id="fig-01_002" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-cap="Diferencia entre módulo, paquete y librería." data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-01_002-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/fig_01_002.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%" data-fig-cap="Diferencia entre módulo, paquete y librería.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-01_002-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Diferencia entre módulo, paquete y librería
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><br></p>
+<p>En orden de jerarquia, la siguiente figura ilustra la relación entre “programa”, “librería”, “módulo”, “script” y “código”.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/fig_01_001.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<figcaption>Jerarquía y relación entre los elementos de un programa en Python</figcaption>
+</figure>
+</div>
+<p><br></p>
+<ul>
+<li><p><strong>Función</strong>: Un bloque reutilizable de instrucciones definido con el keyword “def”, que puede recibir parámetros y devolver valores.</p></li>
+<li><p><strong>Método</strong>: Una función asociada a un objeto específico. Se invoca con la sintaxis objeto.metodo().En el tema 2, trabajaremos más en profundidad la diferencia entre función y método.</p></li>
+<li><p><strong>Clase</strong>: Una plantilla para crear objetos, definiendo sus atributos (datos) y métodos (comportamientos).</p></li>
+<li><p><strong>Objeto</strong>: Una instancia concreta de una clase.</p></li>
+<li><p><strong>Variable</strong>: Espacio en memoria que almacena un valor y que puede cambiar durante la ejecución. Ejemplo: nombre=“Ana”, edad=30.</p>
+<p><br></p></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Diferencia entre clase, objeto y variable</strong></p>
+<p>Piensa en una persona. Esa persona es una “cosa”. Esa cosa es en realidad una <code>clase</code> tipo “persona”, ser humano. Con esa clase, uno puede crear varias personas: Luis, Ana, Fran, Sofía… Cada una de esas personas constituye un <code>objeto</code> concreto. Pero también, esas personas pueden tiener múltiples y diferentes nombres. El nombre oficial de Fran es “Francisco”, pero sus amigos le llaman “Francis”, en el trabajo le conocen como “Xisco” y para su pareja es simplemente “gordi”. Cada uno de estos nombres, hacen referencia al mismo objeto, a la misma persona, Fran. Cada uno de esos nombres que utilizamos para referirnos a un objeto constituye una <code>variable</code>.</p>
+<p>¡No debemos confundir las variables con los atributos! Los atributos, en ese caso, serían las características de ese objeto, esa persona. Por ejemplo, Fran es “hombre”, tiene “54 años”, es “calvo”, “ojos azules” y es “policía”.</p>
+<p>En el tema 2 (sección 2.1.) estudiaremos cómo Python almacena los objetos y sus variables. Recordar este punto te ayudará.</p>
+</div>
+</div>
+<p><br></p>
+</section>
+<section id="herramientas-y-entorno-de-desarrollo" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="herramientas-y-entorno-de-desarrollo"><span class="header-section-number">2.2</span> Herramientas y entorno de desarrollo</h3>
+<p>Además del propio lenguaje de programación, trabajar con Python requiere utilizar diferentes herramientas y componentes que permiten escribir, ejecutar y gestionar el código. En este apartado repasaremos conceptos relacionados con el entorno de desarrollo, como los IDE, las consolas, los kernels, los entornos virtuales y las dependencias, que nos ayudarán a comprender cómo se organiza y configura nuestro espacio de trabajo.</p>
+<p>Principales conceptos:</p>
+<ul>
+<li><p><strong>Entorno</strong>: Espacio de trabajo aislado que contiene una instalación específica de Python y los paquetes necesarios para un proyecto.</p></li>
+<li><p><strong>IDE</strong>: Integrated Development Environment. Programa (software) que facilita escribir, ejecutar y depurar código. Ejemplos: PyCharm, Spyder o VS Code. En nuestra asignatura utilizaremos principalmente “Spyder”, un software del que hablaremos al final de este documento.</p></li>
+<li><p><strong>Terminal</strong>: Ventana donde puedes escribir comandos para interactuar con el sistema operativo o ejecutar programas Python.</p></li>
+<li><p><strong>Kernel</strong>: El “motor” (proceso, software compilado que corre en tu ordenador o servidor) que se encarga de ejecutar el código en el entorno. Mantiene en memoria las variables y estados mientras trabajas.</p></li>
+<li><p><strong>Dependencia</strong>: un paquete que tu código necesita tener instalado en tu entorno para funcionar correctamente. A veces, estas dependencias requieren versiones específicas de otros paquetes para evitar conflictos o errores.</p></li>
+</ul>
+<p><br></p>
+</section>
+<section id="depuración-y-análisis" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="depuración-y-análisis"><span class="header-section-number">2.3</span> Depuración y análisis</h3>
+<p>Durante la programación es habitual cometer errores o encontrarse con resultados que no son los esperados. Por ello, es importante conocer las herramientas y técnicas que permiten identificar problemas, analizar el comportamiento del código y mejorar su funcionamiento. En este sentido, debemos conocer los siguientes conceptos:</p>
+<ul>
+<li><p><strong>Debug/Debuging</strong>: Proceso de encontrar y corregir errores en el código. Ejemplo: usar print() o herramientas como <code>pdb</code>.</p></li>
+<li><p><strong>Perfilado/Profiling</strong>: Técnica para analizar el rendimiento del código, midiendo tiempo de ejecución y uso de recursos.</p></li>
+</ul>
+<p>Aunque comprender estas definiciones ahora pueda resultarte confuso, trabajaremos más sobre ellas en temas sucesivos de la asignatura.</p>
+<p><br></p>
+</section>
+</section>
+<section id="recordando-los-principios-generales-de-programación." class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="recordando-los-principios-generales-de-programación."><span class="header-section-number">3</span> Recordando los principios generales de programación.</h2>
+<p>Más allá de aprender la sintaxis del lenguaje o conseguir que un programa funcione, es importante desarrollar una forma de programar que permita crear soluciones claras, flexibles, fáciles de mantener y que puedan adaptarse a diferentes necesidades.</p>
+<p>Es el momento de recordar los principios generales de progrmación (que ya habéis tratado en la parte de R de la asignatura). Estos principios nos ayudarán a comprender por qué Python ofrece determinadas herramientas y funcionalidades, y a adquirir buenos hábitos desde el principio. Son especialmente relevantes cuando trabajamos con análisis de datos y aplicaciones TIG, donde es habitual combinar diferentes fuentes de información, reutilizar procesos y adaptar los scripts a nuevos proyectos.</p>
+<ul>
+<li><strong>Extensibilidad</strong>: capacidad de ampliar las funcionalidades de un programa o herramienta para adaptarlo a nuevas necesidades o aplicaciones.</li>
+<li><strong>Introspección</strong>: capacidad de un programa para examinar sus propios objetos durante la ejecución, por ejemplo, conocer su tipo, atributos o métodos.</li>
+<li><strong>Modularidad</strong>: principio que consiste en dividir el código en componentes independientes y organizados (funciones, clases y módulos), facilitando su comprensión, mantenimiento y reutilización.</li>
+<li><strong>Reutilización</strong> (DRY – Don’t Repeat Yourself): principio que recomienda evitar la duplicación innecesaria de código. En lugar de escribir varias veces las mismas instrucciones, podemos organizarlas en funciones, clases o módulos que puedan utilizarse en diferentes partes de un programa.</li>
+</ul>
+<p><br></p>
+</section>
+<section id="desarrollo-y-uso-de-python-psf-y-pep" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="desarrollo-y-uso-de-python-psf-y-pep"><span class="header-section-number">4</span> Desarrollo y uso de Python: PSF y PEP</h2>
+<p>Python es un lenguaje de programación de código abierto (open source) cuyo desarrollo está respaldado por una comunidad internacional de programadores, investigadores, empresas y organizaciones. A diferencia de los lenguajes propietarios, cualquier persona puede utilizarlo, estudiar cómo funciona, modificarlo y contribuir a su desarrollo, de acuerdo con las condiciones de su licencia.</p>
+<p><br></p>
+<section id="python-software-foundation" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="python-software-foundation"><span class="header-section-number">4.1</span> Python Software Foundation</h3>
+<p>La Python Software Foundation (PSF) es una organización sin ánimo de lucro que tiene como principal objetivo promover, proteger y hacer avanzar el lenguaje Python y su comunidad.</p>
+<p>Entre sus principales funciones destacan:</p>
+<ul>
+<li>Protección y gestión del proyecto: vela por los derechos de propiedad intelectual, las marcas registradas y las licencias relacionadas con Python.</li>
+<li>Apoyo al desarrollo: proporciona recursos y financiación para mantener y mejorar la infraestructura del ecosistema Python, incluyendo sus herramientas y servicios oficiales.</li>
+<li>Promoción de la comunidad: organiza y apoya iniciativas de divulgación, formación, conferencias y encuentros entre desarrolladores.</li>
+<li>Fomento del uso de Python: impulsa su adopción en ámbitos científicos, educativos, empresariales y tecnológicos.</li>
+</ul>
+<p>Es importante tener en cuenta que la PSF no decide por sí sola qué funcionalidades se incorporan al lenguaje. Su evolución técnica se lleva a cabo mediante un proceso de desarrollo colaborativo en el que participan desarrolladores de la comunidad, mantenedores y responsables del proyecto.</p>
+<p>Puedes consultar más información en la página oficial de la <a href="https://www.python.org/psf-landing/">Python Software Foundation</a>.</p>
+<p><br></p>
+</section>
+<section id="python-enhancement-proposals-peps" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="python-enhancement-proposals-peps"><span class="header-section-number">4.2</span> Python Enhancement Proposals (PEPs)</h3>
+<p>La evolución técnica de Python se organiza, en buena medida, mediante los Python Enhancement Proposals (PEPs), que son documentos en los que se describen y proponen cambios, mejoras, estándares o directrices relacionados con el lenguaje y su ecosistema.</p>
+<p>Los PEP permiten que las propuestas se documenten, discutan, revisen y evalúen de forma transparente antes de tomar una decisión sobre su posible incorporación. No todos los PEP proponen nuevas funcionalidades: algunos establecen convenciones, describen procesos de desarrollo o explican decisiones de diseño.</p>
+<p>Entre los PEP más conocidos destacan:</p>
+<ul>
+<li><p><a href="https://elpythonista.com/pep-8">PEP 8 – Style Guide for Python Code</a>: establece recomendaciones y convenciones para escribir código Python de forma clara, legible y consistente. Incluye aspectos como la indentación, los nombres de variables y funciones, los espacios y la organización del código. Seguir estas recomendaciones facilita la lectura, comprensión y colaboración en proyectos de programación.</p></li>
+<li><p><a href="https://peps.python.org/pep-0020/">PEP 20 – The Zen of Python</a>: recoge una serie de principios que resumen la filosofía de diseño del lenguaje. Entre ellos destacan la importancia de la legibilidad, la simplicidad y la claridad del código. Por ejemplo, uno de sus principios más conocidos es “Readability counts” (la legibilidad importa).</p></li>
+</ul>
+<p>Los PEP son, por tanto, una herramienta fundamental para mantener un desarrollo organizado y consensuado de Python. También constituyen una fuente de consulta muy útil cuando queremos conocer las convenciones y los criterios que hay detrás del lenguaje.</p>
+<p>Puedes consultar el repositorio oficial de propuestas en <a href="https://peps.python.org/">Python Enhancement Proposals</a>.</p>
+<p><br></p>
+</section>
+</section>
+<section id="ide-spyder" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="ide-spyder"><span class="header-section-number">5</span> IDE: Spyder</h2>
+<p>En esta asignatura utilizaremos Spyder (Scientific Python Development Environment), un entorno de desarrollo integrado (IDE) gratuito y de código abierto, diseñado específicamente para la programación científica y el análisis de datos con Python.</p>
+<p>Como hemos visto antes, un IDE (Integrated Development Environment) es una aplicación que reúne diferentes herramientas necesarias para desarrollar programas en un mismo entorno: escritura y edición de código, ejecución de instrucciones, inspección de variables y detección de errores, entre otras.</p>
+<p>Spyder está especialmente orientado al trabajo científico y al análisis de datos, por lo que resulta adecuado para nuestros objetivos en Tecnologías de la Información Geográfica (TIG).</p>
+<p>Su interfaz combina la escritura de scripts con la inspección de datos y la ejecución interactiva del código. Se organiza principalmente en tres paneles:</p>
+<ul>
+<li><p><strong>Editor</strong> (izquierda): espacio para escribir, editar y guardar nuestros programas en archivos .py. Permite organizar el código, ejecutar scripts completos o seleccionar y ejecutar fragmentos concretos. Trabajar mediante scripts facilita guardar, documentar y reproducir nuestros análisis.</p></li>
+<li><p><strong>Explorador de variables</strong> (arriba a la derecha): permite inspeccionar visualmente las variables almacenadas en memoria durante la ejecución del programa. Podemos consultar sus valores y características, así como explorar estructuras de datos como listas, diccionarios, matrices y tablas. Resulta especialmente útil para comprobar los resultados de nuestras operaciones y detectar posibles errores.</p></li>
+<li><p><strong>Consola IPython</strong> (abajo a la derecha): es el intérprete interactivo en el que se ejecutan las instrucciones de Python. Permite probar comandos, realizar cálculos rápidos y ejecutar el código del editor. También muestra los resultados de las operaciones y los mensajes de error que aparecen durante la ejecución.</p></li>
+</ul>
+<p>Esta organización permite combinar dos formas de trabajar con Python: la programación mediante scripts, que facilita la reproducibilidad de los análisis, y la ejecución interactiva, que permite experimentar, comprobar resultados y aprender progresivamente.</p>
+<p>En la siguiente figura se muestra una captura de pantalla de la interfaz de Spyder.</p>
+<div id="fig-01_000" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-cap="Interfaz de Spyder." data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-01_000-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/fig_01_000.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%" data-fig-cap="Interfaz de Spyder.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-01_000-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Interfaz de Spyder.
+</figcaption>
+</figure>
+</div>
+<p><br></p>
+<p>Como habrás podido observar, la interfaz de Spyder no es muy diferente de la interfaz de RStudio. Al igual que en RStudio, Spyder también permite trabajar con proyectos, alojados en diferentes directorios de nuestro ordenador. Los comandos <code>getcwd</code> y <code>chdir</code> de la librería <code>os</code> nos permiten verificar y cambiar (establecer) el directorio de trabajo en el cual nos encontramos trabajando en la sesión actual de Spyder. Observa el siguiente código:</p>
+<div id="6a49ddcc" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os <span class="co"># Importar la librería os</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>os.getcwd() <span class="co"># Obtener el directorio actual de trabajo</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>os.chdir(<span class="vs">r"C:</span><span class="er">\</span><span class="vs">Users</span><span class="er">\</span><span class="vs">Usuario</span><span class="dv">\D</span><span class="vs">ocumentos</span><span class="er">\</span><span class="vs">Proyecto_TIG"</span>) <span class="co"># Cambiar el directorio actual del trabajo.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><br></p>
+<p>Una vez establecido el directorio de trabajo en el que queremos operar, es posible crear nuevas carpetas o directorios con el comando <code>mkdir</code>. EL comando <code>listdir</code> nos puede ayudar a obtener una lista de archivos y subcarpetas existentes dentro de nuestro directorio de trabajo actual.</p>
+<div id="01216251" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>os.mkdir() <span class="co"># Crear una nueva carpeta dentro del directorio de trabajo</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>os.listdir() <span class="co"># Lista archivos y carpetas existentes en el directorio actual del trabajo.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><br></p>
+<p>La interfaz de Spyder también nos permite crear nuevos proyectos de forma manual, accediendo al menú “Proyectos” y la opción “Nuevo proyecto”.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>La importancia del orden en la gestión de archivos</strong></p>
+<p>Recuerda que es importante ser lo más ordenado posible con tus carpetas, sobre todo cuando trabajamos en entornos de programación. La carpeta del proyecto debe estar bien organizada. Una sugerencia de organización es crear varias subcarpetas para ordenar los datos según su naturaleza dentro del proyecto:</p>
+<ul>
+<li><p><strong>code</strong>: los scripts de código puedes guardarlos en una subcarpeta “code”. Puedes nombrarlos de forma secuencial utilizando índices numéricos. Por ejemplo: 00_inicializacion_proyecto.py, 01_carga_datos.py, 02_limpieza de datos.py, 03_analisis_datos1.py, etc.</p></li>
+<li><p><strong>data</strong>: crea una subcarpeta data para guardar los datos con los que vas a trabajar.</p></li>
+<li><p><strong>documents</strong>: crea una subcarpeta de documents donde puedes guardar documentación que escribas sobre el proyecto (un pequeño diario de los avances o <em>cuaderno de bitácora</em>) u otra documentación relevante para entender el mismo. Por ejemplo, bibliografía, artículos científicos, etc.</p></li>
+<li><p><strong>misc</strong>: es una buena práctica también contar con una subcarpeta “miscelánea” donde se almacene otra documentación alternativa interesante relacionada con el proyecto. Por ejemplo, documentación gráfica, como imágenes o infografías utilizadas en el proyecto.</p></li>
+<li><p><strong>output</strong>: es indispensable contar con una subcarpeta donde almacenar los resultados (outputs) generados en nuestro script. Por ejemplo, nuevas bases de datos generadas por la limpieza de bases de datos originales, tablas, mapas, gráficos creados, etc.</p></li>
+</ul>
+</div>
+</div>
+<p><br></p>
+<p>Spyder permite guardar no solo los scripts de código (<code>.py</code>), sino también información relacionada con los proyectos y las variables creadas durante una sesión de trabajo.</p>
+<p>Por un lado, cuando creamos un proyecto en Spyder, se genera una carpeta de configuración denominada <code>.spyproject</code>, que almacena información relacionada con el proyecto, como la configuración y los archivos abiertos en el editor. Además, trabajar con proyectos permite establecer automáticamente la carpeta raíz como directorio de trabajo.</p>
+<p>Por otro lado, Spyder permite guardar el estado del entorno de trabajo mediante archivos con extensión <code>.spydata</code>. Estos archivos almacenan las variables de la sesión para poder recuperarlas posteriormente, sin necesidad de volver a ejecutar todo el código. Pueden incluir diferentes tipos de objetos de Python, como listas, diccionarios, arrays de NumPy y DataFrames de pandas (trabajaremos con ellos en temas sucesivos), así como otros objetos que puedan serializarse correctamente. Sin embargo, algunos objetos que dependen de recursos externos, como conexiones abiertas a bases de datos o determinados manejadores de archivos, pueden no guardarse correctamente. También pueden aparecer problemas de compatibilidad al intentar recuperar estos archivos en otros entornos o versiones de Python.</p>
+<p><strong>Como recomendación, para trabajar de forma organizada y reproducible, es preferible guardar los scripts de código, los datos originales y los resultados generados (<em>outputs</em>) en carpetas diferenciadas.</strong> Aunque guardar el entorno de variables (<code>.spydata</code>) puede resultar útil en determinadas situaciones, no es aconsejable depender exclusivamente de él para conservar el trabajo realizado. Los scripts permiten reconstruir el proceso de análisis y volver a generar los resultados cuando sea necesario.</p>
+<p>Para profundizar en el uso de Spyder y conocer mejor sus funcionalidades, se facilita el capítulo <em>«Serious Scripting with Spyder»</em>, de Lee Vaughan, incluido en el libro <a href="https://www.oreilly.com/library/view/python-tools-for/9781098156688/">Python Tools for Scientists</a> (en inglés).</p>
+<p>Este capítulo está disponible también en la plataforma <a href="https://www.oreilly.com/">O’Reilly</a>, a la que podéis acceder gratuitamente con vuestra cuenta institucional de la Universidad de Alcalá. Su lectura os permitirá ampliar y complementar los contenidos de estos apuntes.</p>
+<p><br></p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Completa el Test 1.1</strong> para afianzar los conceptos trabajados en esta sección y comprobar si tienes alguna duda.</p>
+</div>
+</div>
+<p><br></p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

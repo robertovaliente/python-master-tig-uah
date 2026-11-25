@@ -1,0 +1,15 @@
+## Variables
+
+Python encapsula los datos y los métodos que pueden operar sobre ellos en entidades nombrables conocidas como **objetos**. Todo en Python es un `objeto`, y cada `objeto`tiene una identidad (apunta a un espacio en la _memoria_ del ordenador), un tipo (`int`, `float`, `str`, etc.) y un valor. Así, el número 42 es un objeto al igual que la frase "Hola Mundo!". La identidad de un objeto y su tipo nunca cambian, pero su valor, como sabemos, a veces puede cambiar.
+
+Las **variables** pueden ser definidas como una etiqueta concreta para un objeto. Al igual que las personas pueden tener múltiples etiquetas (nombres, formales, informales, motes, etc.), un objeto en Python también puede ser conocido por múltiples variables.
+
+Cuando realizamos una asignación en Python, por ejemplo `x = 5`, en realidad lo que hacemos es iniciar una variable a un objeto `x`, al que también le estamos otorgando una identidad. Este objeto es único entre todos los objetos existentes en el entorno. El comando `id` nos permite acceder y consultar esta identidad.
+
+```{python}
+x = 5
+
+id(x)
+```
+
+

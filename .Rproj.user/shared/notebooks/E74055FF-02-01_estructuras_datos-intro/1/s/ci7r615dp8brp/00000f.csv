@@ -1,0 +1,34 @@
+"0","# 1. Crea una lista ""a"" con una serie de valores determinados.."
+"0","a = [7, 5, 9]"
+"0","print(""a="", a)"
+"1","a= [7, 5, 9]
+"
+"0","# 2. Clona ""a"" a otra lista ""b"" usando `copy`."
+"0","b = a.copy()"
+"0","print(""b="", b)"
+"1","b= [7, 5, 9]
+"
+"0","# 3.Comprueba la identidad de los objetos ""a"" y ""b""."
+"0","print(""Identidad de a:"", id(a))"
+"0","print(""Identidad de b:"",id(b))"
+"1","Identidad de a: 1501770428736
+"
+"1","Identidad de b: 1501816799168
+"
+"0","# 4. Modifica la lista ""b"" añadiendo un nuevo elemento utilizando el método `append`."
+"0","b.append(3)"
+"0",""
+"0",""
+"0","# 5. Ahora imprime los valores de ""a"" y ""b"" y comprueba la identidad de ambos objetos."
+"0","print(""b="", b, ""--> lista b actualizada con append"")"
+"1","b= [7, 5, 9, 3] --> lista b actualizada con append
+"
+"0","print(""a="", a, ""--> lista a"") # Ojo, también ha cambiado al cambiar b!"
+"1","a= [7, 5, 9] --> lista a
+"
+"0","print(id(a), ""--> identidad de a"") "
+"0","print(id(b), ""--> identidad de b"") # No ha cambiado la identidad!"
+"1","1501770428736 --> identidad de a
+"
+"1","1501816799168 --> identidad de b
+"

@@ -1,0 +1,759 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"Introducción a estructuras de datos\"\n",
+        "author: \"Roberto Valiente ([roberto.valiente@uah.es](mailto:roberto.valiente@uah.es))\"\n",
+        "format:\n",
+        "  html:\n",
+        "    toc: true\n",
+        "    toc-location: right\n",
+        "    toc-depth: 3\n",
+        "    number-sections: true\n",
+        "    code-tools: false\n",
+        "    title-block-banner: true\n",
+        "    title-block-banner-color: \"#ffffff\"\n",
+        "editor: visual\n",
+        "jupyter: python3\n",
+        "---\n",
+        "\n",
+        "\n",
+        "+-----------------------------------------------------------+-----------------------------:+\n",
+        "| \\*\\*Fundamentos de Programación TIG\\*\\*\\                  | ![](images/UAH-cabecera.png) |\n",
+        "| Máster en Tecnologías de la Información Geográfica (TIG)\\ |                              |\n",
+        "| Universidad de Alcalá                                     |                              |\n",
+        "+-----------------------------------------------------------+------------------------------+\n",
+        "\n",
+        "------------------------------------------------------------------------\n",
+        "\n",
+        "Ahora que sabes cómo funciona Spyder, abre un nuevo proyecto para comenzar a escribir código ahí. En este documento encontrarás algunos fragmentos explicativos de código que podrás probar y escribir en Spyder. Puedes usar tanto el \"Editor\" (para guardar los scripts si quieres reproducirlos en el futuro) como la \"Terminal\" si sólo deseas escribir de forma temporal.\n",
+        "\n",
+        "## Tipos de datos\n",
+        "\n",
+        "### Tipos de datos básicos y conversiones\n",
+        "\n",
+        "Al igual que en R, en Python distinguimos entre varios tipos de datos básicos:\n",
+        "\n",
+        "-   **Integer**: números enteros (5).\n",
+        "-   **Float**: números decimales (0.1). Es importante usar siempre el punto como separador de decimales.\n",
+        "-   **String**: cadenas de texto (\"Hola Mundo\").\n",
+        "-   **Bool (booleano)**: valores lógicos (`True` o `False`).\n",
+        "\n",
+        "En Python, la asignación de un valor (sea numérico o string) se realiza con el símbolo \"=\" (a diferencia de R, donde la asinación se realiza con flechas \"\\<-\"). La asignación actúa como una \"etiqueta\" que asiste al acceso de la información en la memoria.\n",
+        "\n",
+        "A continuación, se muestran ejemplos de varias asignaciones en Python.\n"
+      ],
+      "id": "c33223d9"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# INTEGER:\n",
+        "whole_number = 42\n",
+        "\n",
+        "# FLOATS:\n",
+        "float_number = 0.1\n",
+        "\n",
+        "# STRING:\n",
+        "a_string = \"Hola, Mundo!\""
+      ],
+      "id": "2f9ae7cc",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "En el código anterior, observa cómo las almohadillas (#) también sirven para comentar fragmentos de código.\n",
+        "\n",
+        "Oberva como en Spyder también se crean variables en nuestro entorno, al igual que en RStudio. En este caso, Spyder usa un código de colores para distinguir entre varios tipos.\n",
+        "\n",
+        "![Ejemplo de la ventana del explorador de variables de Spyder.](images/fig_02_000.png){#fig-02_000 fig-cap=\"Ejemplo de la ventana del \"explorador de variables\" de Spyder.\" fig-align=\"center\" width=\"70%\"}\n",
+        "\n",
+        "La función '''`type`'' nos ayuda a identificar el tipo de dato de un objeto en Python.\n"
+      ],
+      "id": "aa3a5486"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "type(a_string)"
+      ],
+      "id": "864ea8a0",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Existen también otras funciones que nos permiten convertir un objeto a distintos tipos de datos.\n"
+      ],
+      "id": "de04fc22"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "x = float(whole_number)\n",
+        "y = int(0.1)\n",
+        "z = str(whole_number)\n",
+        "s = bool(y) # La función bool() nos ayuda a convertir un valor en booleano\n",
+        "s = bool(a_string) # Podemos sobrescribir valores tantas veces como queramos\n",
+        "s = bool(x)"
+      ],
+      "id": "8a8692a0",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "La función '''`round`'' también nos permite redondear un número.\n"
+      ],
+      "id": "9afe5ed1"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "a = 5.5689\n",
+        "a1 = round(a, 2) # Redondear a dos posiciones decimales\n",
+        "a2 = round(a) # Redondear a número entero"
+      ],
+      "id": "9e4b7263",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### Operaciones matemáticas y lógicas\n",
+        "\n",
+        "También es posible utilizar Python como calculadora. En la figura 2 puedes encontrar algunos ejemplos de los principales operadores matemáticos soportados en Python.\n",
+        "\n",
+        "![Principales operadores matemáticos en Python.](images/fig_02_001.png){#fig-02_001 fig-cap=\"Principales operadores matemáticos en Python.\" fig-align=\"center\" width=\"50%\"}\n"
+      ],
+      "id": "ef7144a8"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "5 + 3 # Es posible usar Python como calculadora\n",
+        "\n",
+        "x - float_number # También con variables con valores definidos"
+      ],
+      "id": "61cda893",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Fíjate cómo en el ejemplo anterior, Python recuerda que \"X\" es un valor numérico, creada mediante la asignación al objeto \"whole_number\", que tenía un valor de 42.\n",
+        "\n",
+        "También es posible hacer test de lógica en Python.\n",
+        "\n",
+        "![Principales operadores lógicos en Python.](images/fig_02_002.png){#fig-02_002 fig-cap=\"Principales operadores lógicos en Python.\" fig-align=\"center\" width=\"50%\"}\n"
+      ],
+      "id": "ccc66989"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# Haciendo test de lógica en Python:\n",
+        "y > x # Comprueba si un valor es mayor que otro\n",
+        "y >= x\n",
+        "y == float_number  # Para comprobar si un valor es exactamente igual a otro\n",
+        "y != float_number  # O si por el contrario son distintos"
+      ],
+      "id": "093c69d9",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Python también nos permite resolver fórmulas matemáticas complejas.\n"
+      ],
+      "id": "ac2d3bd0"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "10**2 + (6 - 2) / 2 * 3"
+      ],
+      "id": "a4ee33c0",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Observa el resultado de la fómula anterior. Es importante siempre recordar la jerarquía de las operaciones matemáticas.\n",
+        "\n",
+        "![Precedencia matemática.](images/fig_02_003.png){#fig-02_003 fig-cap=\"Precedencia matemática.\" fig-align=\"center\" width=\"30%\"}\n",
+        "\n",
+        "### Asignaciones aumentadas\n",
+        "\n",
+        "Python también nos permite hacer asignaciones aumentadas. Observa el siguente código y fíjate en cómo cambian los valores de X.\n"
+      ],
+      "id": "663b9a31"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "x = 5\n",
+        "print(x)\n",
+        "x = x + 5\n",
+        "print(x)"
+      ],
+      "id": "afd11799",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Incluso añadiendo los signos de operaciones matemáticas al símbolo de asignación.\n"
+      ],
+      "id": "c95429bf"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "x += 5\n",
+        "print(x)"
+      ],
+      "id": "63d565ce",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "También es posible hacer operaciones de asignación aumentada sobre strings. En estos casos lo que sucederá será una concatenación de los valores\n"
+      ],
+      "id": "78feafc6"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "a_string + \" \" + z\n",
+        "z *=2 #También se pueden hacer asignaciones aumentadas con strings."
+      ],
+      "id": "bef72864",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "No obstante, hay algunos casos de operaciones matemáticas que necesitan interacción con variables integer. Trata de ejecutar la siguiente secuencia y observa el error que genera.\n"
+      ],
+      "id": "bff8d2cf"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| eval: false\n",
+        "a_string * z"
+      ],
+      "id": "f1eb8833",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "![Ejemplo de TypeError.](images/fig_02_004.png){#fig-02_004 fig-cap=\"Ejemplo de TypeError.\" fig-align=\"center\" width=\"50%\"}\n",
+        "\n",
+        "### Módulo \"math\" en Python\n",
+        "\n",
+        "La biblioteca estándar de Python incluye un módulo '''`math`'' que proporciona funciones para realizar operaciones matemáticas más específicas, como trabajar con factoriales, ecuaciónes cuadráticas, funciones trigonométricas, exponenciales, hiperbólicas, etc. Como seguramente recordarás de la parte de R de la asignatura, las funciones son como miniprogramas que realizan una o varias tareas. Ocultan los detalles de estos programas para que puedas escribir un código más limpio.\n",
+        "\n",
+        "Para usar una función, escribe el nombre de la función seguido de paréntesis. Los valores o variables que introduzcas dentro de los paréntesis servirán como datos de entrada para la función. Más adelante, aprenderemos a definir funciones en Python.\n",
+        "\n",
+        "Los grupos de funciones relacionadas con una misma temática o propósito suelen reunirse en módulos. Un módulo, no es más que un archivo '''\\`.py'' con funciones, clases y variables que se pueden importar como en otro archivo como código. A veces, módulo y librería se usan como sinónimos, pero lo cierto es que una librería hace referencia a una colección de módulos (es decir, a un \"paquete\").\n",
+        "\n",
+        "Para usar el módulo '''`math`'', primero debes importarlo mediante el comando '''`import`''. El siguiente fragmento de código, muestra las principales funciones dentro del módulo '''`math`''.\n"
+      ],
+      "id": "ae30f89e"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| eval: false\n",
+        "\n",
+        "ceil(x) #Returns the smallest integer greater than or equal to x\n",
+        "\n",
+        "fabs(x) #Returns the absolute value of x as a floating-point number\n",
+        "\n",
+        "factorial(x) #Returns the factorial of x\n",
+        "\n",
+        "floor(x) #Returns the largest integer less than or equal to x\n",
+        "\n",
+        "frexp(x) #Returns the mantissa and exponent of x as the pair (m, e)\n",
+        "\n",
+        "isnan(x) #Returns True if x is a NaN (Not a Number)\n",
+        "\n",
+        "exp(x) #Returns e**x\n",
+        "\n",
+        "log(x[, b]) #Returns the logarithm of x to the base b (defaults to e)\n",
+        "\n",
+        "log2(x) #Returns the base-2 logarithm of x\n",
+        "\n",
+        "log10(x) #Returns the base-10 logarithm of x\n",
+        "\n",
+        "pow(x, y) #Returns x raised to the power y\n",
+        "\n",
+        "sqrt(x) #Returns the square root of x\n",
+        "\n",
+        "acos(x) #Returns the arc cosine of x\n",
+        "\n",
+        "asin(x) #Returns the arc sine of x\n",
+        "\n",
+        "atan(x) #Returns the arc tangent of x\n",
+        "\n",
+        "atan2(y, x) #Returns the arc tangent of y / x\n",
+        "\n",
+        "cos(x) #Returns the cosine of x\n",
+        "\n",
+        "hypot(x, y) #Returns the Euclidean norm, sqrt(x**2 + y**2)\n",
+        "\n",
+        "sin(x) #Returns the sine of x\n",
+        "\n",
+        "tan(x) #Returns the tangent of x\n",
+        "\n",
+        "degrees(x) #Converts x from radians to degrees\n",
+        "\n",
+        "radians(x) #Converts x from degrees to radians"
+      ],
+      "id": "4af16609",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Observa el uso de algunas funciones anteriores en el siguiente código.\n"
+      ],
+      "id": "d130d4d2"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "import math\n",
+        "\n",
+        "x = math.radians(45)\n",
+        "print(x)\n",
+        "\n",
+        "math.cos(x)"
+      ],
+      "id": "d33ca38d",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "En el código anterior, para usar las funciones de '''`math`'', primero debemos importar el módulo. Después, para llamar a cada funcion ('''`radians`'' o '''`cos`'' en este caso) debemos indicar el nombre del módulo seguido de un punto para llamar a la función ('''`math.radians`''). Esta es la manera en la que le decimos a Python que use la función '''`radians`'' dentro del módulo '''`math`''. Piensa que en Python la \"notacion de punto\" funciona de forma similar al genitivo sajón en inglés ('''`math.radians`'' = math's radians funcion). Esta es una de las principales diferencias de escritura de código entre R y Python. Mientras que en Python la norma es indicar el nombre del módulo de pertenencia de la función, en R la norma es NO indicarlo. Por otro lado, en R el uso del punto (.) es sólo un carácter más y no indica pertenencia (a pesar de que se use en algunas funciones, por ejemplo '''`read.csv`''). Cuando en R realmente se necesita especificar el paquete por algún conflicto de nombres, se utilizan los dos puntos dobles '''`::`'' en lugar del punto.\n",
+        "\n",
+        "### Trabajo con strings en Python\n",
+        "\n",
+        "Más allá de la concatenación (+) y la repetición (\\*) asistida con algunos operadores matemáticos como hemos visto antes, los strings (cadenas de texto) soportan diversas operaciones de secuencia. Entre las más habituales se encuentran el *slicing* (extracción de subcadenas mediante `índices`) y las *pruebas de pertenencia*. Veamos algunos ejemplos prácticos de ambas\n",
+        "\n",
+        "#### Indexación y *String slicing*\n",
+        "\n",
+        "A veces, extraer caracteres individuales o dividir cadenas de texto (palabras o frases) son las tareas más habituales al trabajar con un objeto string. En Python podemos utilizar los corchetes `[]` para acceder a un carácter concreto según su posición. Como probablemente recordarás de R, esta operación recibe el nombre de **indexación**.\n",
+        "\n",
+        "::: callout-warning\n",
+        "**¡Atención! Cuidado con la numeración en la indexación**\n",
+        "\n",
+        "A diferencia de R, Python empieza a contar desde 0. Por ello, el primer elemento de una cadena será siempre el 0 en lugar del 1.\n",
+        ":::\n",
+        "\n",
+        "Veamos un ejemplo de indexación:\n"
+      ],
+      "id": "4f5a46fc"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "x = 'PYTHON' # Creamos un string\n",
+        "x[0] # Extraemos el primer elemento\n",
+        "\n",
+        "x[5] # Extraemos el sexto elemento"
+      ],
+      "id": "32a2c298",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Usando dos puntos `:`dentro de los corchetes `[]` podemos extraer trozos de la cadena de caracteres. Esto es lo que llamamos *string slicing*.\n",
+        "\n",
+        "Veamos algunos ejemplos:\n"
+      ],
+      "id": "dff5cae4"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "x[:3]\n",
+        "x[0:3] # Básicamente, lo mismo que lo anterior.\n",
+        "x[2:]"
+      ],
+      "id": "f631e908",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "La numeración que se incluye a cada lado de los dos puntos `:`dentro de un corchete `[]` se lee de la siguiente forma: `[inicio : fin]`. Si no se indica nada a la izquierda de los dos puntos, se entiende que el inicio es el primer elemento (la P en PYTHON). Si no se indica nada a la derecha de los dos puntos, se entiende que el final es el último elemento (la N en PYTHON).\n",
+        "\n",
+        "Exploremos ahora el funcionamiento de los dos puntos más en profundidad con algunos ejemplos:\n"
+      ],
+      "id": "62b07bb6"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# Ejemplo 1:\n",
+        "x[2:5]\n",
+        "\n",
+        "# Ejemplo 2:\n",
+        "x[0:5:2]"
+      ],
+      "id": "991413ff",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Analicemos los resultados en profundidad. El objeto `x`se corresponde con la palabra PYTHON cuyos índices se corresponden de la siguiente manera: P Y T H O N 0 1 2 3 4 5\n",
+        "\n",
+        "En el ejemplo 1, vemos que el resultado ha sido \"THO\". La letra \"T\" se corresponde con el índice 2, indicando que el inicio es justamente el índice 2, incluyendo esa letra. No obstante, la instrucción indica el fin en el índice 5, pero la última letra reportada ha sido la letra \"O\" que se corresponde con el índice 4. Esto quiere decir que cuando se trata de indicar el final de la cadena, Python nunca incluye el valor al que hace referencia. En un símil matemático, los índices en Python sería como usar la siguiente estructura para un intervalo: `[valor1, valor2)`. El corchete `[` inicial indica que el primer valor si se incluye, y el paréntesis `)` final representa que el último valor no está incluido.\n",
+        "\n",
+        "Veamos ahora el resultado del segundo ejemplo. Cuando tenemos una estructura con tres términos dentro del corchete `[término1:término2:término3]`, cada término debe interpretarse de la siguiente manera: `[inicio:fin:paso]`. Es decir, como muestra el resultado \"PTO\", la cadena empieza en el primer elemento (índice 0), termina justo antes del sexto elemento (índice 5, que no se incluye) y avanza de 2 en 2 posiciones (dejando 1 elemento sin coger entre cada selección). Así, se incluye el primer elemento \"P\", se salta \"Y\" para incluir \"T\", y se salta \"H\" para incluir \"O\".\n",
+        "\n",
+        "::: callout-note\n",
+        "**Minirreto 1**. Descifrando operaciones de string slicing.\n",
+        "\n",
+        "Ahora que ya sabemos cómo funciona el *string slicing* en Python, ¿sabrías explicar los resultados de las siguientes operaciones?\n",
+        "\n",
+        "Operación 1: x\\[-1\\]\n",
+        "\n",
+        "Operación 2: x\\[-3\\]\n",
+        "\n",
+        "Operación 3: x\\[::-1\\]\n",
+        ":::\n",
+        "\n",
+        "<small>Nota: podrás descifrar el resultado de estas operaciones en el test 1 de este tema.</small>\n",
+        "\n",
+        "#### Operaciones de pertenencia\n",
+        "\n",
+        "Muchas veces necesitamos simplemente consultar si un caracter o una palabra se encuentra dentro de una cadena. Estas consultas simples se pueden realizar con los operadores `in` y `not in`.\n"
+      ],
+      "id": "c9e216a2"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "'e' in 'scientist'\n",
+        "\n",
+        "'engineer' not in 'I am a scientist'"
+      ],
+      "id": "a044cb48",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "No obstante, para consultas masivas o más complejas, Python incorpora de forma nativa los siguientes métodos para trabajar con strings.\n"
+      ],
+      "id": "08f46541"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| eval: false\n",
+        "\n",
+        "str.capitalize() #Capitalizes the first character with the rest lowercase\n",
+        "\n",
+        "str.count(sub, start, end) #Counts occurrences of a character or substring\n",
+        "\n",
+        "str.endswith(suffix, start, end) #Returns True if string ends with the suffix\n",
+        "\n",
+        "str.find(sub, start, end) #Returns lowest index where substring is found within slice\n",
+        "\n",
+        "str.isalnum() #Returns True if all string characters are alphanumeric\n",
+        "\n",
+        "str.isalpha() #Returns True if all string characters are alphabetic\n",
+        "\n",
+        "str.isdigit() #Returns True if all string characters are digits\n",
+        "\n",
+        "str.islower() #Returns True if all string characters are lowercase\n",
+        "\n",
+        "str.isupper() #Returns True if all string characters are uppercase\n",
+        "\n",
+        "str.lower() #Changes all cased characters to lowercase\n",
+        "\n",
+        "str.replace(old, new, count) #Replace old substring with new substring\n",
+        "\n",
+        "str.split(sep=None, maxsplit=-1) #Return list of words with “sep” character as the delimiter\n",
+        "\n",
+        "str.startswith(prefix, start, end) #Return True if string starts with the prefix\n",
+        "\n",
+        "str.strip(chars) #Removes leading and trailing characters; removes whitespace if no character is specified\n",
+        "\n",
+        "str.title() #Capitalizes the first character in each word\n",
+        "\n",
+        "str.upper() #Changes all cased characters to uppercase"
+      ],
+      "id": "0b9073d0",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "A continuación, podemos probar alguno de estos métodos.\n"
+      ],
+      "id": "056b2383"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# Algunos métodos básicos con strings:\n",
+        "str.capitalize(a_string) # Pone en mayúsculas la primera letra\n",
+        "str.upper(a_string) # Convierte todo en mayúsculas\n",
+        "\n",
+        "# También pueden separarse caracteres:\n",
+        "brutus_said = 'Ave, Cesar.'\n",
+        "words = brutus_said.split()\n",
+        "print(words)"
+      ],
+      "id": "7abbe7ae",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Seguramente te estarás preguntando por qué a estos comandos les llamamos **métodos** y no funciones, si parecen lo mismo. Al igual que hemos visto con el módulo `math` se escriben siguiendo la \"notación de punto\" pero su significado no es el mismo. Todo depende de lo que haya a la izquierda del punto (.). Si lo que hay a la izquierda del punto es un \"paquete\" o un módulo, el comando que aparece a la derecha del punto es una función, como ocurría cuando explicabamos las funcionalidades del módulo `math`. No obstante, si lo que hay a la izquierda del punto es un objeto, sobre el cual operamos una acción (por ejemplo `brutus_said.split()`), lo que hay a la derecha se le llama método.\n",
+        "\n",
+        "::: callout-important\n",
+        "**Métodos vs Funciones** En Python, los objetos suelen tener sus propias \"capacidades\" integradas (llamadas **métodos**). Por ejemplo, un objeto de tipo string como brutus_said puede ejecutar brutus_said.split() para devolver una lista con sus palabras separadas (creando un objeto nuevo, sin modificar el texto, objeto, original).\n",
+        "\n",
+        "Esto supone una diferencia visual importante respecto a la forma de escribir código en R, donde lo habitual es pasar el dato dentro de una función (funcion(objeto), como `strsplit(brutus_said, \" \")`), mientras que en Python se suele usar la notación de punto (objeto.metodo()).\n",
+        "\n",
+        "Esta manera de trabajar forma parte de la **Programación Orientada a Objetos (POO)**, un paradigma en el que los propios objetos son los protagonistas y contienen sus propias acciones, en contraste con enfoques más funcionales (Progamación Funcional) o procedimentales (Programación Procedimental) donde funciones externas operan sobre los datos.\n",
+        ":::\n",
+        "\n",
+        "<br>\n",
+        "\n",
+        "## Tipos de contenedores\n",
+        "\n",
+        "Además de los tipos de datos descritos anteriormente, en Python podemos trabajar con diferentes estructuras o contenedores de datos. En este sentido, podemos distinguir entre 4 contenedores de datos básicos: 1) tuplas, 2) listas, 3) sets y 4) diccionarios.\n",
+        "\n",
+        "Veamos la definición y características de cada una de ellas.\n",
+        "\n",
+        "\n",
+        "### Tuplas\n",
+        "\n",
+        "Las tuplas son una secuencia de valores ordenada, iterable, con una longitud fija e **inmutables**. Pueden contener valores heterogéneos como números enteros (`int`), decimales (`float`) o cadenas de caracteres (`str`). Para crear una tupla, basta con listar los valores dentro de un paréntesis:\n"
+      ],
+      "id": "68592ef4"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "tupla = (1, 2, 3) # Tupla simple\n",
+        "t2 = (1, (2, 3), (4, 5, (6, 7))) # Tupla anidada"
+      ],
+      "id": "2e6ba177",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Observa como al ejecutar el fragmento de código anterior aparecen dos nuevos objetos en el explorador de variables. El objeto `tupla` tiene 3 elementos, todos ellos de tipo `int`. El objeto `t2` es una tupla anidada. También tiene 3 elementos pero en este caso, el primero es un número entero y los otros dos son tuplas en sí mismas. Fíjate que Spyder permite abrir la tupla para inspeccionar los valores haciendo doble clic sobre el nombre del objeto en el explorador de variables.\n",
+        "\n",
+        "![Captura de pantalla del objeto t2.](images/fig_02_005.png){#fig-02_005 fig-cap=\"Captura de pantalla del objeto t2.\" fig-align=\"center\" width=\"70%\"}\n",
+        "\n",
+        "\n",
+        "Los elementos de una tupla también pueden asignarse a objetos individuales:\n"
+      ],
+      "id": "8d4c9bc2"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "x, y, z = t2 # Desempaquetar tupla t2"
+      ],
+      "id": "002a9966",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Mira como el código anterior crea tres nuevos objetos, (`x`, `y`, `z`), cada uno albergando los elementos de la tupla `t2`. A este proceso se le llama `unpack` (desempaquetar). \n",
+        "\n",
+        "También podemos convertir un objeto en tupla con la función `tuple()`.\n"
+      ],
+      "id": "42d7aa8c"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "x = tuple(\"Hello, World!\") # Función para convertir un objeto a tupla"
+      ],
+      "id": "d7340885",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "La indexación mediante el uso de los corchetes (`[]`) que hemos visto en el epígrafe \"Trabajo con strings\" también funciona con estas estructuras de datos. Presta atención al siguiente fragmento de código e interpreta qué elementos se extraen en cada caso.\n"
+      ],
+      "id": "cfce6d9e"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "print(tupla)\n",
+        "print(tupla[1])\n",
+        "print(tupla[2])"
+      ],
+      "id": "40e67f38",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Recuerda que Python empieza a contar desde 0, por lo que el elemento `[1]` en el objeto `tupla` es en realidad el segundo elemento (2).\n",
+        "\n",
+        "En caso de trabajar con tuplas anidadas, debemos indicar corchetes sucesivos (`[][]`) para indicar claramente los valores a los que hacemos referencia dentro de cada tupla. La siguiente figura explica de forma gráfica la sintaxis. Fíjate que el _uso de los paréntesis_ es importante para distinguir entre los elementos de una tupla.\n",
+        "\n",
+        "![Sintaxis para extraer índices en una tupla anidada.](images/fig_02_006.jpg){#fig-02_006 fig-cap=\"Sintaxis para extraer índices en una tupla anidada.\" fig-align=\"center\" width=\"50%\"}\n",
+        "\n",
+        "\n",
+        "Atendiendo a la figura anterior, veamos un ejemplo de indexacion aplicado a nuestra tupla anidada `t2`. Observa y analiza los resultados.\n"
+      ],
+      "id": "3b1f656d"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# Muestra la tupla\n",
+        "print(t2)\n",
+        "\n",
+        "# Indexación 1\n",
+        "print(t2[1])\n",
+        "\n",
+        "# Indexación 2\n",
+        "print(t2[2][2])\n",
+        "\n",
+        "# Indexación 3\n",
+        "print(t2[2][2][0])"
+      ],
+      "id": "80a8a404",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Los objetos tipo tupla pueden usar los métodos y funciones presentadas en las siguientes figuras.\n",
+        "\n",
+        "![Métodos básicos para usar en tuplas.](images/fig_02_007.png){#fig-02_007 fig-cap=\"Métodos básicos para usar en tuplas.\" fig-align=\"center\" width=\"40%\"}\n",
+        "\n",
+        "\n",
+        "![Funciones básicas para usar en tuplas.](images/fig_02_008.png){#fig-02_008 fig-cap=\"Funciones básicas para usar en tuplas.\" fig-align=\"center\" width=\"40%\"}\n",
+        "\n",
+        "\n",
+        "\n",
+        "### Listas\n",
+        "\n",
+        "\n",
+        "\n",
+        "### Sets\n",
+        "\n",
+        "\n",
+        "\n",
+        "### Diccionarios\n",
+        "\n",
+        "\n",
+        "\n",
+        "Recuerda hablar de: en Python la indexación con corchetes \\[\\] no es exclusiva de los textos (str), sino que se puede usar con cualquier tipo de dato ordenado o clave-valor (listas, tuplas, diccionarios, etc.). En cambio, los tipos numéricos simples (como un int o un float) no se pueden indexar porque no son colecciones de elemento\n"
+      ],
+      "id": "f6f8c13d"
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "display_name": "Python 3",
+      "language": "python",
+      "name": "python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}
