@@ -1,0 +1,7 @@
+"0","x = 'PYTHON' # Creamos un string"
+"0","x[0] # Extraemos el primer elemento"
+"1","'P'
+"
+"0","x[5] # Extraemos el sexto elemento"
+"1","'N'
+"

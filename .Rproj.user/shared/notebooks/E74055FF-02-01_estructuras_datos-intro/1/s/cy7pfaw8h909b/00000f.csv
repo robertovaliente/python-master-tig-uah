@@ -1,0 +1,13 @@
+"0","# Haciendo test de lógica en Python:"
+"0","print(y > x) # Comprueba si un valor es mayor que otro"
+"1","False
+"
+"0","print(y >= x)"
+"1","False
+"
+"0","print(y == float_number)  # Para comprobar si un valor es exactamente igual a otro"
+"1","False
+"
+"0","print(y != float_number)  # O si por el contrario son distintos"
+"1","True
+"

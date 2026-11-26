@@ -1,0 +1,7 @@
+"0","print(a_string + "" "" + z)"
+"1","Hola, Mundo! 4242424242424242
+"
+"0","z *=2 #También se pueden hacer asignaciones aumentadas con strings."
+"0","print(z)"
+"1","42424242424242424242424242424242
+"

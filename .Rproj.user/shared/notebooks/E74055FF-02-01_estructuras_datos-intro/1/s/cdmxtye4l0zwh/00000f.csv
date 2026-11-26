@@ -1,0 +1,10 @@
+"0","# Creando un set numérico:"
+"0","s = {1, 2, 3}"
+"0","print(s)"
+"1","{1, 2, 3}
+"
+"0","# Creando otro set:"
+"0","frutas = {'platano', 'kiwi', 'albaricoque'}"
+"0","print(frutas)"
+"1","{'platano', 'kiwi', 'albaricoque'}
+"

@@ -1,0 +1,13 @@
+"0","# Algunos métodos básicos con strings:"
+"0","str.capitalize(a_string) # Pone en mayúsculas la primera letra"
+"1","'Hola, mundo!'
+"
+"0","str.upper(a_string) # Convierte todo en mayúsculas"
+"1","'HOLA, MUNDO!'
+"
+"0","# También pueden separarse caracteres:"
+"0","brutus_said = 'Ave, Cesar.'"
+"0","words = brutus_said.split()"
+"0","print(words)"
+"1","['Ave,', 'Cesar.']
+"

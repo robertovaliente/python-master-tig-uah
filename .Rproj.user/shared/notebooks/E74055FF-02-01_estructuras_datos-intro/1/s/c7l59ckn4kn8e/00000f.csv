@@ -1,0 +1,7 @@
+"0","# La indexación en los set no se hace por posición, sino por pertenencia:"
+"0","print(1 in s)   # True"
+"1","True
+"
+"0","print(45 in s)      # False"
+"1","False
+"

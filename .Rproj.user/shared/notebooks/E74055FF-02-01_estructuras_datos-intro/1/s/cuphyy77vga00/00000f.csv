@@ -1,0 +1,9 @@
+"0","print(x[:3])"
+"1","PYT
+"
+"0","print(x[0:3]) # Básicamente, lo mismo que lo anterior."
+"0","print(x[2:])"
+"1","PYT
+"
+"1","THON
+"

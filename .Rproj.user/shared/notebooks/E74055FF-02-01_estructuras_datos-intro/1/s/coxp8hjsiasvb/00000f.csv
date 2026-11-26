@@ -1,0 +1,6 @@
+"0","print('e' in 'scientist')"
+"1","True
+"
+"0","print('engineer' not in 'I am a scientist')"
+"1","True
+"

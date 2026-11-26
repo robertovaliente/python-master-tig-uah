@@ -1,0 +1,6 @@
+"0","#| eval: false"
+"0","a_string * z"
+"2","Traceback (most recent call last):
+  File ""<string>"", line 1, in <module>
+TypeError: can't multiply sequence by non-int of type 'str'
+"

@@ -1,0 +1,7 @@
+"0","x = float(whole_number)"
+"0","y = int(0.1)"
+"0","z = str(whole_number)"
+"0","s = bool(y) # La función bool() nos ayuda a convertir un valor en booleano"
+"0","s = bool(a_string) # Podemos sobrescribir valores tantas veces como queramos"
+"0","s = bool(x)"
+"0",""

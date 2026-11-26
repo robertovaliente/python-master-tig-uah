@@ -1,0 +1,1743 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Roberto Valiente (roberto.valiente@uah.es)">
+
+<title>2.1. Tipos de datos y contenedores en Python</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="02-01_estructuras_datos-intro_files/libs/clipboard/clipboard.min.js"></script>
+<script src="02-01_estructuras_datos-intro_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="02-01_estructuras_datos-intro_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="02-01_estructuras_datos-intro_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="02-01_estructuras_datos-intro_files/libs/quarto-html/popper.min.js"></script>
+<script src="02-01_estructuras_datos-intro_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="02-01_estructuras_datos-intro_files/libs/quarto-html/anchor.min.js"></script>
+<link href="02-01_estructuras_datos-intro_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="02-01_estructuras_datos-intro_files/libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="02-01_estructuras_datos-intro_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="02-01_estructuras_datos-intro_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="02-01_estructuras_datos-intro_files/libs/bootstrap/bootstrap-9e3ffae467580fdb927a41352e75a2e0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<style>
+
+      .quarto-title-block .quarto-title-banner h1,
+      .quarto-title-block .quarto-title-banner h2,
+      .quarto-title-block .quarto-title-banner h3,
+      .quarto-title-block .quarto-title-banner h4,
+      .quarto-title-block .quarto-title-banner h5,
+      .quarto-title-block .quarto-title-banner h6
+      {
+        color: #ffffff;
+      }
+
+      .quarto-title-block .quarto-title-banner {
+        color: #ffffff;
+      }
+</style>
+
+
+</head>
+
+<body class="quarto-light">
+
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">2.1. Tipos de datos y contenedores en Python</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Roberto Valiente (<a href="mailto:roberto.valiente@uah.es">roberto.valiente@uah.es</a>) </p>
+            </div>
+    </div>
+      
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#tipos-de-datos" id="toc-tipos-de-datos" class="nav-link active" data-scroll-target="#tipos-de-datos"><span class="header-section-number">1</span> Tipos de datos</a>
+  <ul class="collapse">
+  <li><a href="#tipos-de-datos-básicos-y-conversiones" id="toc-tipos-de-datos-básicos-y-conversiones" class="nav-link" data-scroll-target="#tipos-de-datos-básicos-y-conversiones"><span class="header-section-number">1.1</span> Tipos de datos básicos y conversiones</a></li>
+  <li><a href="#operaciones-matemáticas-y-lógicas" id="toc-operaciones-matemáticas-y-lógicas" class="nav-link" data-scroll-target="#operaciones-matemáticas-y-lógicas"><span class="header-section-number">1.2</span> Operaciones matemáticas y lógicas</a></li>
+  <li><a href="#asignaciones-aumentadas" id="toc-asignaciones-aumentadas" class="nav-link" data-scroll-target="#asignaciones-aumentadas"><span class="header-section-number">1.3</span> Asignaciones aumentadas</a></li>
+  <li><a href="#módulo-math-en-python" id="toc-módulo-math-en-python" class="nav-link" data-scroll-target="#módulo-math-en-python"><span class="header-section-number">1.4</span> Módulo “math” en Python</a></li>
+  <li><a href="#trabajo-con-strings-en-python" id="toc-trabajo-con-strings-en-python" class="nav-link" data-scroll-target="#trabajo-con-strings-en-python"><span class="header-section-number">1.5</span> Trabajo con strings en Python</a></li>
+  </ul></li>
+  <li><a href="#tipos-de-contenedores" id="toc-tipos-de-contenedores" class="nav-link" data-scroll-target="#tipos-de-contenedores"><span class="header-section-number">2</span> Tipos de contenedores</a>
+  <ul class="collapse">
+  <li><a href="#tuplas" id="toc-tuplas" class="nav-link" data-scroll-target="#tuplas"><span class="header-section-number">2.1</span> Tuplas</a></li>
+  <li><a href="#listas" id="toc-listas" class="nav-link" data-scroll-target="#listas"><span class="header-section-number">2.2</span> Listas</a></li>
+  <li><a href="#sets" id="toc-sets" class="nav-link" data-scroll-target="#sets"><span class="header-section-number">2.3</span> Sets</a></li>
+  <li><a href="#diccionarios" id="toc-diccionarios" class="nav-link" data-scroll-target="#diccionarios"><span class="header-section-number">2.4</span> Diccionarios</a></li>
+  </ul></li>
+  <li><a href="#explorando-la-identidad-de-los-objetos-en-python" id="toc-explorando-la-identidad-de-los-objetos-en-python" class="nav-link" data-scroll-target="#explorando-la-identidad-de-los-objetos-en-python"><span class="header-section-number">3</span> Explorando la identidad de los objetos en Python</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<table class="caption-top table">
+<colgroup>
+<col style="width: 65%">
+<col style="width: 34%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><strong>Fundamentos de Programación TIG</strong><br> Máster en Tecnologías de la Información Geográfica (TIG)<br>
+Universidad de Alcalá</td>
+<td style="text-align: right;"><img src="images/UAH-cabecera.png" class="img-fluid"></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p><br> <br></p>
+<p>Ahora que dominas lo básico de Spyder, crea un nuevo proyecto para empezar a programar. A lo largo de este tutorial verás varios ejemplos prácticos sobre tipos de datos y contenedores, que son las estructuras más simples de Python. Te animo a que los escribas y ejecutes por tu cuenta mientras lees. Para ello, usa el <strong>Editor</strong> si quieres guardar tus scripts para el futuro, o la <strong>Consola</strong> (“Terminal”) si solo quieres hacer pruebas rápidas.</p>
+<p><br></p>
+<section id="tipos-de-datos" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="tipos-de-datos"><span class="header-section-number">1</span> Tipos de datos</h2>
+<section id="tipos-de-datos-básicos-y-conversiones" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="tipos-de-datos-básicos-y-conversiones"><span class="header-section-number">1.1</span> Tipos de datos básicos y conversiones</h3>
+<p>Al programar, necesitamos trabajar con distinta clase de información: desde hacer cálculos hasta procesar texto. Al igual que en R, en Python distinguimos entre varios tipos de datos básicos:</p>
+<ul>
+<li><strong>Integer</strong>: números enteros (5).</li>
+<li><strong>Float</strong>: números decimales (0.1). Es importante usar siempre el punto como separador de decimales.</li>
+<li><strong>String</strong>: cadenas de texto (“Hola Mundo”).</li>
+<li><strong>Bool (booleano)</strong>: valores lógicos (<code>True</code> o <code>False</code>).</li>
+</ul>
+<p>En Python, la asignación de un valor (sea numérico o string) se realiza con el símbolo “=” (a diferencia de R, donde la asinación se realiza con flechas “&lt;-”). La asignación actúa como una “etiqueta” que asiste al acceso de la información en la memoria.</p>
+<p>A continuación, se muestran ejemplos de varias asignaciones en Python.</p>
+<div id="6565aa49" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># INTEGER:</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>whole_number <span class="op">=</span> <span class="dv">42</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># FLOATS:</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>float_number <span class="op">=</span> <span class="fl">0.1</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># STRING:</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>a_string <span class="op">=</span> <span class="st">"Hola, Mundo!"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><br></p>
+<p>En el código anterior, observa cómo las almohadillas (#) también sirven para comentar fragmentos de código.</p>
+<p>Oberva como en Spyder también se crean variables en nuestro entorno, al igual que en RStudio. En este caso, Spyder usa un código de colores para distinguir entre varios tipos.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/fig_02_000.png" class="img-fluid figure-img"></p>
+<figcaption>Ejemplo de la ventana del explorador de variables de Spyder.</figcaption>
+</figure>
+</div>
+<p><br></p>
+<p>La función <code>type</code> nos ayuda a identificar el tipo de dato de un objeto en Python.</p>
+<div id="99de66a4" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(a_string)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="78">
+<pre><code>str</code></pre>
+</div>
+</div>
+<p><br></p>
+<p>Existen también otras funciones que nos permiten convertir un objeto a distintos tipos de datos.</p>
+<div id="093b84e2" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="bu">float</span>(whole_number)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="bu">int</span>(<span class="fl">0.1</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> <span class="bu">str</span>(whole_number)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> <span class="bu">bool</span>(y) <span class="co"># La función bool() nos ayuda a convertir un valor en booleano</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> <span class="bu">bool</span>(a_string) <span class="co"># Podemos sobrescribir valores tantas veces como queramos</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> <span class="bu">bool</span>(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><br></p>
+<p>La función <code>round</code> también nos permite redondear un número.</p>
+<div id="3a76cb4a" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="fl">5.5689</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>a1 <span class="op">=</span> <span class="bu">round</span>(a, <span class="dv">2</span>) <span class="co"># Redondear a dos posiciones decimales</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>a2 <span class="op">=</span> <span class="bu">round</span>(a) <span class="co"># Redondear a número entero</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><br></p>
+</section>
+<section id="operaciones-matemáticas-y-lógicas" class="level3" data-number="1.2">
+<h3 data-number="1.2" class="anchored" data-anchor-id="operaciones-matemáticas-y-lógicas"><span class="header-section-number">1.2</span> Operaciones matemáticas y lógicas</h3>
+<p>También es posible utilizar Python como calculadora. En la figura 2 puedes encontrar algunos ejemplos de los principales operadores matemáticos soportados en Python.</p>
+<p><img src="images/fig_02_001.png" id="fig-02_001" class="img-fluid quarto-figure quarto-figure-center anchored" style="width:50.0%" data-fig-cap="Principales operadores matemáticos en Python." alt="Principales operadores matemáticos en Python."> <br></p>
+<div id="0322c7f9" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">5</span> <span class="op">+</span> <span class="dv">3</span>) <span class="co"># Es posible usar Python como calculadora</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">-</span> float_number <span class="co"># También con variables con valores definidos</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>8</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="81">
+<pre><code>41.9</code></pre>
+</div>
+</div>
+<p><br></p>
+<p>Fíjate cómo en el ejemplo anterior, Python recuerda que “x” es un valor numérico, creado mediante la asignación al objeto “whole_number”, que tenía un valor de 42.</p>
+<p>También es posible hacer test de lógica en Python.</p>
+<p><img src="images/fig_02_002.png" id="fig-02_002" class="img-fluid quarto-figure quarto-figure-center anchored" style="width:50.0%" data-fig-cap="Principales operadores lógicos en Python." alt="Principales operadores lógicos en Python."> <br></p>
+<div id="c94876c0" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Haciendo test de lógica en Python:</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(y <span class="op">&gt;</span> x) <span class="co"># Comprueba si un valor es mayor que otro</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(y <span class="op">&gt;=</span> x)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(y <span class="op">==</span> float_number)  <span class="co"># Para comprobar si un valor es exactamente igual a otro</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(y <span class="op">!=</span> float_number)  <span class="co"># O si por el contrario son distintos</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>False
+False
+False
+True</code></pre>
+</div>
+</div>
+<p><br></p>
+<p>Python también nos permite resolver fórmulas matemáticas complejas.</p>
+<div id="ab4cda2f" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span><span class="op">**</span><span class="dv">2</span> <span class="op">+</span> (<span class="dv">6</span> <span class="op">-</span> <span class="dv">2</span>) <span class="op">/</span> <span class="dv">2</span> <span class="op">*</span> <span class="dv">3</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="83">
+<pre><code>106.0</code></pre>
+</div>
+</div>
+<p><br></p>
+<p>Observa el resultado de la fómula anterior. Es importante siempre recordar la jerarquía de las operaciones matemáticas.</p>
+<p><img src="images/fig_02_003.png" id="fig-02_003" class="img-fluid quarto-figure quarto-figure-center anchored" style="width:30.0%" data-fig-cap="Precedencia matemática." alt="Precedencia matemática."> <br></p>
+</section>
+<section id="asignaciones-aumentadas" class="level3" data-number="1.3">
+<h3 data-number="1.3" class="anchored" data-anchor-id="asignaciones-aumentadas"><span class="header-section-number">1.3</span> Asignaciones aumentadas</h3>
+<p>Python también nos permite hacer asignaciones aumentadas. Observa el siguente código y fíjate en cómo cambian los valores de “x”.</p>
+<div id="e66467c2" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> x <span class="op">+</span> <span class="dv">5</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>5
+10</code></pre>
+</div>
+</div>
+<p><br></p>
+<p>Incluso añadiendo los signos de operaciones matemáticas al símbolo de asignación.</p>
+<div id="dd3b0218" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">+=</span> <span class="dv">5</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>15</code></pre>
+</div>
+</div>
+<p><br></p>
+<p>También es posible hacer operaciones de asignación aumentada sobre strings. En estos casos lo que sucederá será una concatenación de los valores.</p>
+<div id="f84da336" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a_string <span class="op">+</span> <span class="st">" "</span> <span class="op">+</span> z)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>z <span class="op">*=</span><span class="dv">2</span> <span class="co">#También se pueden hacer asignaciones aumentadas con strings.</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(z)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Hola, Mundo! 42
+4242</code></pre>
+</div>
+</div>
+<p><br></p>
+<p>No obstante, hay algunos casos de operaciones matemáticas que necesitan interacción con variables <code>integer</code>. Trata de ejecutar la siguiente secuencia y observa el error que genera.</p>
+<div id="59171e39" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>a_string <span class="op">*</span> z</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><br></p>
+<div id="fig-02_004" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-cap="Ejemplo de TypeError." data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-02_004-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/fig_02_004.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%" data-fig-cap="Ejemplo de TypeError.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-02_004-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Ejemplo de TypeError.
+</figcaption>
+</figure>
+</div>
+<p><br></p>
+</section>
+<section id="módulo-math-en-python" class="level3" data-number="1.4">
+<h3 data-number="1.4" class="anchored" data-anchor-id="módulo-math-en-python"><span class="header-section-number">1.4</span> Módulo “math” en Python</h3>
+<p>La biblioteca estándar de Python incluye un módulo <code>math</code> que proporciona funciones para realizar operaciones matemáticas más específicas, como trabajar con factoriales, ecuaciónes cuadráticas, funciones trigonométricas, exponenciales, hiperbólicas, etc. Como seguramente recordarás de la parte de R de la asignatura, las funciones son como miniprogramas que realizan una o varias tareas. Ocultan los detalles de estos programas para que puedas escribir un código más limpio.</p>
+<p>Para usar una función, escribe el nombre de la función seguido de paréntesis. Los valores o variables que introduzcas dentro de los paréntesis servirán como datos de entrada para la función. Más adelante, aprenderemos a definir funciones en Python.</p>
+<p>Los grupos de funciones relacionadas con una misma temática o propósito suelen reunirse en módulos. Un módulo, no es más que un archivo <code>.py</code> con funciones, clases y variables que se pueden importar como en otro archivo como código.</p>
+<p>Para usar el módulo <code>math</code>, primero debes importarlo mediante el comando <code>import</code>. El siguiente fragmento de código, muestra las principales funciones dentro del módulo <code>math</code>.</p>
+<div id="c6e3b5ac" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>ceil(x) <span class="co">#Returns the smallest integer greater than or equal to x</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>fabs(x) <span class="co">#Returns the absolute value of x as a floating-point number</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>factorial(x) <span class="co">#Returns the factorial of x</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>floor(x) <span class="co">#Returns the largest integer less than or equal to x</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>frexp(x) <span class="co">#Returns the mantissa and exponent of x as the pair (m, e)</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>isnan(x) <span class="co">#Returns True if x is a NaN (Not a Number)</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>exp(x) <span class="co">#Returns e**x</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>log(x[, b]) <span class="co">#Returns the logarithm of x to the base b (defaults to e)</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>log2(x) <span class="co">#Returns the base-2 logarithm of x</span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>log10(x) <span class="co">#Returns the base-10 logarithm of x</span></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a><span class="bu">pow</span>(x, y) <span class="co">#Returns x raised to the power y</span></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>sqrt(x) <span class="co">#Returns the square root of x</span></span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>acos(x) <span class="co">#Returns the arc cosine of x</span></span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>asin(x) <span class="co">#Returns the arc sine of x</span></span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>atan(x) <span class="co">#Returns the arc tangent of x</span></span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>atan2(y, x) <span class="co">#Returns the arc tangent of y / x</span></span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a>cos(x) <span class="co">#Returns the cosine of x</span></span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a>hypot(x, y) <span class="co">#Returns the Euclidean norm, sqrt(x**2 + y**2)</span></span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a>sin(x) <span class="co">#Returns the sine of x</span></span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a>tan(x) <span class="co">#Returns the tangent of x</span></span>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a>degrees(x) <span class="co">#Converts x from radians to degrees</span></span>
+<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a>radians(x) <span class="co">#Converts x from degrees to radians</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><br></p>
+<p>Observa el uso de algunas funciones anteriores en el siguiente código.</p>
+<div id="aeb58102" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> math.radians(<span class="dv">45</span>)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>math.cos(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0.7853981633974483</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="87">
+<pre><code>0.7071067811865476</code></pre>
+</div>
+</div>
+<p><br></p>
+<p>En el código anterior, para usar las funciones de <code>math</code>, primero debemos importar el módulo. Después, para llamar a cada funcion (<code>radians</code> o <code>cos</code> en este caso) debemos indicar el nombre del módulo seguido de un punto para llamar a la función (<code>math.radians</code>). Esta es la manera en la que le decimos a Python que use la función <code>radians</code> dentro del módulo <code>math</code>. Piensa que en Python la “notacion de punto” funciona de forma similar al genitivo sajón en inglés (<code>math.radians</code> = <em>math’s radians function</em>). Esta es una de las principales diferencias de escritura de código entre R y Python. Mientras que en Python la norma es indicar el nombre del módulo de pertenencia de la función, en R la norma es NO indicarlo. Por otro lado, en R el uso del punto (.) es sólo un carácter más y no indica pertenencia (a pesar de que se use en algunas funciones, por ejemplo <code>read.csv</code>). Cuando en R realmente se necesita especificar el paquete por algún conflicto de nombres, se utilizan los dos puntos dobles <code>::</code> en lugar del punto.</p>
+<p><br></p>
+</section>
+<section id="trabajo-con-strings-en-python" class="level3" data-number="1.5">
+<h3 data-number="1.5" class="anchored" data-anchor-id="trabajo-con-strings-en-python"><span class="header-section-number">1.5</span> Trabajo con strings en Python</h3>
+<p>Más allá de la concatenación (+) y la repetición (*) asistida con algunos operadores matemáticos como hemos visto antes, los strings (cadenas de texto) soportan diversas operaciones de secuencia. Entre las más habituales se encuentran el <em>slicing</em> (extracción de subcadenas mediante <code>índices</code>) y las <em>pruebas de pertenencia</em>. Veamos algunos ejemplos prácticos de ambas.</p>
+<p><br></p>
+<section id="indexación-y-string-slicing" class="level4" data-number="1.5.1">
+<h4 data-number="1.5.1" class="anchored" data-anchor-id="indexación-y-string-slicing"><span class="header-section-number">1.5.1</span> Indexación y <em>String slicing</em></h4>
+<p>A veces, extraer caracteres individuales o dividir cadenas de texto (palabras o frases) son las tareas más habituales al trabajar con un objeto string. En Python podemos utilizar los corchetes <code>[]</code> para acceder a un carácter concreto según su posición. Como probablemente recordarás de R, esta operación recibe el nombre de <strong>indexación</strong>. <br></p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>¡Atención! Cuidado con la numeración en la indexación</strong></p>
+<p>A diferencia de R, Python empieza a contar desde 0. Por ello, el primer elemento de una cadena será siempre el 0 en lugar del 1.</p>
+</div>
+</div>
+<p><br></p>
+<p>Veamos un ejemplo de indexación:</p>
+<div id="3e606944" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="st">'PYTHON'</span> <span class="co"># Creamos un string</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x[<span class="dv">0</span>]) <span class="co"># Extraemos el primer elemento</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x[<span class="dv">5</span>]) <span class="co"># Extraemos el sexto elemento</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="co"># El código también funciona sin usar la función print, pero esta función asegura que todos los resultados se impriman y se muestren</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>P
+N</code></pre>
+</div>
+</div>
+<p><br></p>
+<p>Usando dos puntos <code>:</code>dentro de los corchetes <code>[]</code> podemos extraer trozos de la cadena de caracteres. Esto es lo que llamamos <em>string slicing</em>.</p>
+<p>A continuación se muestran algunos ejemplos:</p>
+<div id="57be4ea4" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x[:<span class="dv">3</span>])</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x[<span class="dv">0</span>:<span class="dv">3</span>]) <span class="co"># Básicamente, lo mismo que lo anterior.</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x[<span class="dv">2</span>:])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>PYT
+PYT
+THON</code></pre>
+</div>
+</div>
+<p><br></p>
+<p>La numeración que se incluye a cada lado de los dos puntos <code>:</code>dentro de un corchete <code>[]</code> se lee de la siguiente forma: <code>[inicio : fin]</code>. Si no se indica nada a la izquierda de los dos puntos, se entiende que el inicio es el primer elemento (la P en PYTHON). Si no se indica nada a la derecha de los dos puntos, se entiende que el final es el último elemento (la N en PYTHON).</p>
+<p>Exploremos ahora el funcionamiento de los dos puntos más en profundidad con algunos ejemplos:</p>
+<div id="04af9c32" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ejemplo 1:</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x[<span class="dv">2</span>:<span class="dv">5</span>])</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Ejemplo 2:</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x[<span class="dv">0</span>:<span class="dv">5</span>:<span class="dv">2</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>THO
+PTO</code></pre>
+</div>
+</div>
+<p><br></p>
+<p>Analicemos los resultados en profundidad. El objeto <code>x</code> se corresponde con la palabra PYTHON cuyos índices se corresponden de la siguiente manera:<br> P Y T H O N <br> 0 1 2 3 4 5 <br></p>
+<p>En el ejemplo 1, vemos que el resultado ha sido “THO”. La letra “T” se corresponde con el índice 2, indicando que el inicio es justamente el índice 2, incluyendo esa letra. No obstante, la instrucción indica el fin en el índice 5, pero la última letra reportada ha sido la letra “O” que se corresponde con el índice 4. Esto quiere decir que cuando se trata de indicar el final de la cadena, Python nunca incluye el valor al que hace referencia. En un símil matemático, los índices en Python sería como usar la siguiente estructura para un intervalo: <code>[valor1, valor2)</code>. El corchete <code>[</code> inicial indica que el primer valor si se incluye, y el paréntesis <code>)</code> final representa que el último valor no está incluido.</p>
+<p>Veamos ahora el resultado del segundo ejemplo. Cuando tenemos una estructura con tres términos dentro del corchete <code>[término1:término2:término3]</code>, cada término debe interpretarse de la siguiente manera: <code>[inicio:fin:paso]</code>. Es decir, como muestra el resultado “PTO”, la cadena empieza en el primer elemento (índice 0), termina justo antes del sexto elemento (índice 5, que no se incluye) y avanza de 2 en 2 posiciones (dejando 1 elemento sin coger entre cada selección). Así, se incluye el primer elemento “P”, se salta “Y” para incluir “T”, y se salta “H” para incluir “O”.</p>
+<p><br></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Minirreto 1</strong>. Descifrando operaciones de string slicing.</p>
+<p>Ahora que ya sabemos cómo funciona el <em>string slicing</em> en Python, siendo <code>x = 'PYTHON'</code>, ¿sabrías explicar los resultados de las siguientes operaciones?</p>
+<p>Operación 1: x[-1]</p>
+<p>Operación 2: x[-3]</p>
+<p>Operación 3: x[::-1]</p>
+</div>
+</div>
+<p><small>Nota: podrás descifrar el resultado de estas operaciones en el test 2.1. de este tema.</small></p>
+<p><br></p>
+</section>
+<section id="operaciones-de-pertenencia" class="level4" data-number="1.5.2">
+<h4 data-number="1.5.2" class="anchored" data-anchor-id="operaciones-de-pertenencia"><span class="header-section-number">1.5.2</span> Operaciones de pertenencia</h4>
+<p>Muchas veces necesitamos simplemente consultar si un caracter o una palabra se encuentra dentro de una cadena. Estas consultas simples se pueden realizar con los operadores <code>in</code> y <code>not in</code>.</p>
+<div id="fd990d87" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'e'</span> <span class="kw">in</span> <span class="st">'scientist'</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'engineer'</span> <span class="kw">not</span> <span class="kw">in</span> <span class="st">'I am a scientist'</span>)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Podemos obviar escribir la función print</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>True
+True</code></pre>
+</div>
+</div>
+<p><br></p>
+<p>No obstante, para consultas masivas o más complejas, Python incorpora de forma nativa los siguientes métodos para trabajar con strings:</p>
+<div id="986f3b84" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="bu">str</span>.capitalize() <span class="co">#Capitalizes the first character with the rest lowercase</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="bu">str</span>.count(sub, start, end) <span class="co">#Counts occurrences of a character or substring</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="bu">str</span>.endswith(suffix, start, end) <span class="co">#Returns True if string ends with the suffix</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="bu">str</span>.find(sub, start, end) <span class="co">#Returns lowest index where substring is found within slice</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a><span class="bu">str</span>.isalnum() <span class="co">#Returns True if all string characters are alphanumeric</span></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a><span class="bu">str</span>.isalpha() <span class="co">#Returns True if all string characters are alphabetic</span></span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a><span class="bu">str</span>.isdigit() <span class="co">#Returns True if all string characters are digits</span></span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a><span class="bu">str</span>.islower() <span class="co">#Returns True if all string characters are lowercase</span></span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a><span class="bu">str</span>.isupper() <span class="co">#Returns True if all string characters are uppercase</span></span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a><span class="bu">str</span>.lower() <span class="co">#Changes all cased characters to lowercase</span></span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a><span class="bu">str</span>.replace(old, new, count) <span class="co">#Replace old substring with new substring</span></span>
+<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a><span class="bu">str</span>.split(sep<span class="op">=</span><span class="va">None</span>, maxsplit<span class="op">=-</span><span class="dv">1</span>) <span class="co">#Return list of words with “sep” character as the delimiter</span></span>
+<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-25"><a href="#cb32-25" aria-hidden="true" tabindex="-1"></a><span class="bu">str</span>.startswith(prefix, start, end) <span class="co">#Return True if string starts with the prefix</span></span>
+<span id="cb32-26"><a href="#cb32-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a><span class="bu">str</span>.strip(chars) <span class="co">#Removes leading and trailing characters; removes whitespace if no character is specified</span></span>
+<span id="cb32-28"><a href="#cb32-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-29"><a href="#cb32-29" aria-hidden="true" tabindex="-1"></a><span class="bu">str</span>.title() <span class="co">#Capitalizes the first character in each word</span></span>
+<span id="cb32-30"><a href="#cb32-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-31"><a href="#cb32-31" aria-hidden="true" tabindex="-1"></a><span class="bu">str</span>.upper() <span class="co">#Changes all cased characters to uppercase</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><br></p>
+<p>A continuación, podemos probar alguno de estos métodos.</p>
+<div id="f8ecee4d" class="cell" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Algunos métodos básicos con strings:</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">str</span>.capitalize(a_string)) <span class="co"># Pone en mayúsculas la primera letra</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">str</span>.upper(a_string)) <span class="co"># Convierte todo en mayúsculas</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="co"># También pueden separarse caracteres:</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>brutus_said <span class="op">=</span> <span class="st">'Ave, Cesar.'</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>words <span class="op">=</span> brutus_said.split()</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(words)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Hola, mundo!
+HOLA, MUNDO!
+['Ave,', 'Cesar.']</code></pre>
+</div>
+</div>
+<p><br></p>
+<p>Seguramente te estarás preguntando por qué a estos comandos les llamamos <strong>métodos</strong> y no funciones, si parecen lo mismo. Al igual que hemos visto con el módulo <code>math</code> se escriben siguiendo la “notación de punto” pero su significado no es el mismo. Todo depende de lo que haya a la izquierda del punto (.). Si lo que hay a la izquierda del punto es un “paquete” o un módulo, el comando que aparece a la derecha del punto es una función, como ocurría cuando explicabamos las funcionalidades del módulo <code>math</code>. No obstante, si lo que hay a la izquierda del punto es un objeto, sobre el cual operamos una acción (por ejemplo <code>brutus_said.split()</code>), lo que hay a la derecha se le llama método.</p>
+<p><br></p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Métodos vs Funciones</strong></p>
+<p>En Python, los objetos suelen tener sus propias “capacidades” integradas (llamadas <strong>métodos</strong>). Por ejemplo, un objeto de tipo string como brutus_said puede ejecutar brutus_said.split() para devolver una lista con sus palabras separadas (creando un objeto nuevo, sin modificar el texto, objeto, original).</p>
+<p>Esto supone una diferencia visual importante respecto a la forma de escribir código en R, donde lo habitual es pasar el dato dentro de una función (funcion(objeto), como <code>strsplit(brutus_said, " ")</code>), mientras que en Python se suele usar la notación de punto (objeto.metodo()).</p>
+<p>Esta manera de trabajar forma parte de la <strong>Programación Orientada a Objetos (POO)</strong>, un paradigma en el que los propios objetos son los protagonistas y contienen sus propias acciones, en contraste con enfoques más funcionales (Progamación Funcional) o procedimentales (Programación Procedimental) donde funciones externas operan sobre los datos. Puedes revisitar los apuntes 1.1. en el Tema 1 para refrescar algunos conceptos.</p>
+</div>
+</div>
+<p><br></p>
+</section>
+</section>
+</section>
+<section id="tipos-de-contenedores" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="tipos-de-contenedores"><span class="header-section-number">2</span> Tipos de contenedores</h2>
+<p>Además de los tipos de datos descritos anteriormente, en Python podemos trabajar con diferentes estructuras o contenedores de datos. En este sentido, podemos distinguir entre 4 contenedores de datos básicos: 1) tuplas, 2) listas, 3) sets y 4) diccionarios.</p>
+<p>Veamos la definición y características de cada uno de ellos.</p>
+<p><br></p>
+<section id="tuplas" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="tuplas"><span class="header-section-number">2.1</span> Tuplas</h3>
+<p>Las tuplas son una secuencia de valores ordenada, iterable, con una longitud fija e <strong>inmutables</strong>. Pueden contener valores heterogéneos como números enteros (<code>int</code>), decimales (<code>float</code>) o cadenas de caracteres (<code>str</code>). Para crear una tupla, basta con listar los valores dentro de un paréntesis:</p>
+<div id="bdd9ddee" class="cell" data-execution_count="20">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>tupla <span class="op">=</span> (<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>) <span class="co"># Tupla simple</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>t2 <span class="op">=</span> (<span class="dv">1</span>, (<span class="dv">2</span>, <span class="dv">3</span>), (<span class="dv">4</span>, <span class="dv">5</span>, (<span class="dv">6</span>, <span class="dv">7</span>))) <span class="co"># Tupla anidada</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><br></p>
+<p>Observa como al ejecutar el fragmento de código anterior aparecen dos nuevos objetos en el explorador de variables. El objeto <code>tupla</code> tiene 3 elementos, todos ellos de tipo <code>int</code>. El objeto <code>t2</code> es una tupla anidada. También tiene 3 elementos pero en este caso, el primero es un número entero y los otros dos son tuplas en sí mismas. Fíjate que Spyder permite abrir la tupla para inspeccionar los valores haciendo doble clic sobre el nombre del objeto en el explorador de variables.</p>
+<div id="fig-02_005" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-cap="Captura de pantalla del objeto t2." data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-02_005-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/fig_02_005.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%" data-fig-cap="Captura de pantalla del objeto t2.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-02_005-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Captura de pantalla del objeto t2.
+</figcaption>
+</figure>
+</div>
+<p><br></p>
+<p>Los elementos de una tupla también pueden asignarse a objetos individuales:</p>
+<div id="aac89eda" class="cell" data-execution_count="21">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>x, y, z <span class="op">=</span> t2 <span class="co"># Desempaquetar tupla t2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><br></p>
+<p>Mira como el código anterior crea tres nuevos objetos, (<code>x</code>, <code>y</code>, <code>z</code>), cada uno albergando los elementos de la tupla <code>t2</code>. A este proceso se le llama <code>unpack</code> (desempaquetar).</p>
+<p>También podemos convertir un objeto en tupla con la función <code>tuple()</code>.</p>
+<div id="1e48deb8" class="cell" data-execution_count="22">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="bu">tuple</span>(<span class="st">"Hello, World!"</span>) <span class="co"># Función para convertir un objeto a tupla</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><br></p>
+<p>La indexación mediante el uso de los corchetes (<code>[]</code>) que hemos visto en el epígrafe “Trabajo con strings” también funciona con estas estructuras de datos. Presta atención al siguiente fragmento de código e interpreta qué elementos se extraen en cada caso.</p>
+<div id="d9ccc68e" class="cell" data-execution_count="23">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tupla)</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tupla[<span class="dv">1</span>])</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tupla[<span class="dv">2</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(1, 2, 3)
+2
+3</code></pre>
+</div>
+</div>
+<p><br></p>
+<p>Recuerda que Python empieza a contar desde 0, por lo que el elemento <code>[1]</code> en el objeto <code>tupla</code> es en realidad el segundo elemento (2).</p>
+<p>En caso de trabajar con tuplas anidadas, debemos indicar corchetes sucesivos (<code>[][]</code>) para indicar claramente los valores a los que hacemos referencia dentro de cada tupla. La siguiente figura explica de forma gráfica la sintaxis. Fíjate que el <em>uso de los paréntesis</em> es importante para distinguir entre los elementos de una tupla.</p>
+<p><img src="images/fig_02_006.jpg" id="fig-02_006" class="img-fluid quarto-figure quarto-figure-center anchored" style="width:50.0%" data-fig-cap="Sintaxis para extraer índices en una tupla anidada." alt="Sintaxis para extraer índices en una tupla anidada."> <br></p>
+<p>Atendiendo a la figura anterior, veamos un ejemplo de indexacion aplicado a nuestra tupla anidada <code>t2</code>. Observa y analiza los resultados.</p>
+<div id="ad29859a" class="cell" data-execution_count="24">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Muestra la tupla</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(t2)</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Indexación 1</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(t2[<span class="dv">1</span>])</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Indexación 2</span></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(t2[<span class="dv">2</span>][<span class="dv">2</span>])</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Indexación 3</span></span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(t2[<span class="dv">2</span>][<span class="dv">2</span>][<span class="dv">0</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(1, (2, 3), (4, 5, (6, 7)))
+(2, 3)
+(6, 7)
+6</code></pre>
+</div>
+</div>
+<p>Los objetos tipo tupla pueden usar los métodos y funciones presentadas en las siguientes figuras.</p>
+<p><img src="images/fig_02_007.png" id="fig-02_007" class="img-fluid quarto-figure quarto-figure-center anchored" style="width:40.0%" data-fig-cap="Métodos básicos para usar en tuplas." alt="Métodos básicos para usar en tuplas."> <br></p>
+<div id="fig-02_008" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-cap="Funciones básicas para usar en tuplas." data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-02_008-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/fig_02_008.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:40.0%" data-fig-cap="Funciones básicas para usar en tuplas.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-02_008-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Funciones básicas para usar en tuplas.
+</figcaption>
+</figure>
+</div>
+<p><br></p>
+</section>
+<section id="listas" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="listas"><span class="header-section-number">2.2</span> Listas</h3>
+<p>Las listas son una secuencia ordenada, iterable, de longitud variable y <strong>mutable</strong> de valores. Son objetos similares a las tuplas, pero <strong>mutables</strong> (retén esta idea, pues en el epígrafe “Explorando la identidad de los objetos en Python” veremos qué es esto de objetos mutables e inmutables).</p>
+<p>Para crear una lista se deben utilizar los corchetes <code>[]</code>, a diferencia de las tuplas que usan los paréntesis <code>()</code>.</p>
+<div id="98d89f41" class="cell" data-execution_count="25">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creando una lista:</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>dna_bases <span class="op">=</span> [<span class="st">'adenosine'</span>, <span class="st">'guanine'</span>, <span class="st">'cytosine'</span>, <span class="st">'thimidine'</span>]</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>dna_bases</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="98">
+<pre><code>['adenosine', 'guanine', 'cytosine', 'thimidine']</code></pre>
+</div>
+</div>
+<p><br></p>
+<p>En las listas, los corchetes también sirven para hacer indexaciones y acceder a elementos concretos del objeto.</p>
+<div id="f3f57c3b" class="cell" data-execution_count="26">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>dna_bases[<span class="dv">0</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="99">
+<pre><code>'adenosine'</code></pre>
+</div>
+</div>
+<p><br></p>
+<p>A continuación, se muestran los métodos que funcionan con objetos tipo lista.</p>
+<div id="34272185" class="cell" data-execution_count="27">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>append() <span class="co">#Add a single item to the end of a list --&gt; list_name.append(item)</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>extend() <span class="co">#Add iterable items to the end of a list --&gt; list_name.extend(iterable)</span></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>insert() <span class="co">#Insert an item before a given index (i) --&gt; list_name.insert(i, item)</span></span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>remove() <span class="co">#Remove first item from list with value = item --&gt;list_name.remove(item)</span></span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a>pop() <span class="co">#Remove and return item at given index --&gt; list_name.pop(index)</span></span>
+<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-11"><a href="#cb46-11" aria-hidden="true" tabindex="-1"></a>clear() <span class="co">#Remove all items from a list --&gt; list_name.clear()</span></span>
+<span id="cb46-12"><a href="#cb46-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-13"><a href="#cb46-13" aria-hidden="true" tabindex="-1"></a>index() <span class="co">#Return index of first item with value = item --&gt; list_name.index(item)</span></span>
+<span id="cb46-14"><a href="#cb46-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-15"><a href="#cb46-15" aria-hidden="true" tabindex="-1"></a>count() <span class="co">#Return number of times an item appears in a list --&gt; list_name.count(item)</span></span>
+<span id="cb46-16"><a href="#cb46-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-17"><a href="#cb46-17" aria-hidden="true" tabindex="-1"></a>sort() <span class="co">#Sort list items in place --&gt;list_name.sort()</span></span>
+<span id="cb46-18"><a href="#cb46-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-19"><a href="#cb46-19" aria-hidden="true" tabindex="-1"></a>reverse() <span class="co">#Reverse list items in place --&gt; list_name.reverse()</span></span>
+<span id="cb46-20"><a href="#cb46-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-21"><a href="#cb46-21" aria-hidden="true" tabindex="-1"></a>copy() <span class="co">#Return a shallow copy of a list --&gt; list_name.copy()</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><br></p>
+<p>Date cuenta que al ser objetos mutables, las listas tienen más métodos que las tuplas. Que un objeto sea mutable significa que lo podemos editar. Por ejemplo, añadiendo nuevos valores a la lista (<code>append</code>), reordenándolos (<code>sort</code>) o borrando entradas (<code>remove</code>, <code>pop</code>). Practiquemos con algunos ejemplos.</p>
+<div id="9ea2cdea" class="cell" data-execution_count="28">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>lista <span class="op">=</span> [<span class="st">'manzana'</span>, <span class="st">'pera'</span>, <span class="st">'melocotón'</span>] </span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Resultado de lista:"</span>, lista)</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>lista.append(<span class="st">'naranja'</span>) <span class="co"># Función para añadir elementos a una lista</span></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Resultado de lista.append:"</span>, lista)</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>fruta_fav <span class="op">=</span> lista.pop(<span class="dv">3</span>) <span class="co"># Extrae un elemento y lo asigna a una variable nueva</span></span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Resultado de fruta_fav:"</span>, fruta_fav) <span class="co"># El elemento ha sido "cortado y pegado"</span></span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a>lista.sort() <span class="co"># Al ser mutables, las listas pueden ordenarse alfabéticamente</span></span>
+<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Resultado de lista.sort alfabético:"</span>, lista)</span>
+<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-13"><a href="#cb47-13" aria-hidden="true" tabindex="-1"></a>lista.sort(key<span class="op">=</span><span class="bu">len</span>) <span class="co"># Incluso, los criterios para ordenase pueden variar</span></span>
+<span id="cb47-14"><a href="#cb47-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Resultado de lista.sort por longitud:"</span>, lista)</span>
+<span id="cb47-15"><a href="#cb47-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-16"><a href="#cb47-16" aria-hidden="true" tabindex="-1"></a>lista.remove(<span class="st">'pera'</span>) <span class="co"># Borrar elemento por valor exacto </span></span>
+<span id="cb47-17"><a href="#cb47-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Resultado de lista.remove por valor exacto:"</span>, lista)</span>
+<span id="cb47-18"><a href="#cb47-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-19"><a href="#cb47-19" aria-hidden="true" tabindex="-1"></a>lista.pop(<span class="dv">0</span>) <span class="co"># Borrar elemento por índice (posición 0)</span></span>
+<span id="cb47-20"><a href="#cb47-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Resultado de lista.pop por índice:"</span>, lista)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Resultado de lista: ['manzana', 'pera', 'melocotón']
+Resultado de lista.append: ['manzana', 'pera', 'melocotón', 'naranja']
+Resultado de fruta_fav: naranja
+Resultado de lista.sort alfabético: ['manzana', 'melocotón', 'pera']
+Resultado de lista.sort por longitud: ['pera', 'manzana', 'melocotón']
+Resultado de lista.remove por valor exacto: ['manzana', 'melocotón']
+Resultado de lista.pop por índice: ['melocotón']</code></pre>
+</div>
+</div>
+<p><br></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Diferencia entre append() y extend()</strong></p>
+<p>La diferencia principal es que append() añade el elemento completo al final como una sola unidad, mientras que extend() recorre un iterable (como otra lista) y añade sus elementos uno por uno.</p>
+<div id="1c35cefc" class="cell" data-execution_count="29">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>]</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>a.append([<span class="dv">3</span>, <span class="dv">4</span>])</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a)  <span class="co"># Resultado: [1, 2, [3, 4]] -&gt; Añadió la lista entera dentro de la otra (lista anidada)</span></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>]</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>b.extend([<span class="dv">3</span>, <span class="dv">4</span>])</span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(b)  <span class="co"># Resultado: [1, 2, 3, 4]   -&gt; Unió los elementos individuales</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1, 2, [3, 4]]
+[1, 2, 3, 4]</code></pre>
+</div>
+</div>
+<p>Que un objeto sea iterable quiere decir que podemos recorrer sus elementos uno por uno. Esto significa que podemos pasarle funciones o métodos como <code>extend()</code> o utilizar bucles <code>for</code>, como veremos en el Tema 3. Tanto las listas como las tuplas, son elementos iterables.</p>
+</div>
+</div>
+<p><br></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Minirreto 2</strong>. Listas en R y Python: ¿son lo mismo?</p>
+<ol type="1">
+<li><p>Crea una lista <code>x</code> en Python que contenga los valores 10, 20, 30 y 40.</p></li>
+<li><p>Crea esa misma lista <code>x</code>en R. Compara la sintaxis entre ambos lenguajes.</p></li>
+<li><p>Ejecuta los siguientes bloques de código en R y Python. Interpreta los resultados.</p></li>
+</ol>
+<div id="14c9c2c2" class="cell" data-execution_count="30">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># código en R:</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">1</span>]</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>x[[<span class="dv">1</span>]]</span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">2</span>:<span class="dv">3</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="ddc70816" class="cell" data-execution_count="31">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Código en Python:</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">1</span>]</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">0</span>]</span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">1</span>:<span class="dv">3</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ol start="4" type="1">
+<li><p>Añade un elemento nuevo con valor “50” a la lista <code>x</code>. ¿Qué sintaxis usarías en R? ¿Y en Python? Compáralas.</p></li>
+<li><p>Ejecuta los siguientes bloques de código en R y Python. ¿Qué resultado produce cada operación? ¿Multiplicar una lista por 2 significa lo mismo en ambos lenguajes?</p></li>
+</ol>
+<div id="4b86f09e" class="cell" data-execution_count="32">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Código en R:</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">&lt;-</span> <span class="bu">list</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>)</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">*</span> <span class="dv">2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="8f1bdc4c" class="cell" data-execution_count="33">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Código en Python:</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> [<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>]</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">*</span> <span class="dv">2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ol start="6" type="1">
+<li>Modifica el segundo elemento de la lista por el valor “100”. ¿Qué código usarías en R? ¿Y en Python?</li>
+</ol>
+</div>
+</div>
+<p><small>Nota: podrás descifrar el resultado de estas operaciones en el test 2.1. de este tema.</small></p>
+<p><br></p>
+</section>
+<section id="sets" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="sets"><span class="header-section-number">2.3</span> Sets</h3>
+<p>Los sets son una colección de valores con las siguientes características:</p>
+<ul>
+<li><p>son valores únicos: no admite duplicados.</p></li>
+<li><p>desordenados: no son accesibles a través de índices (<code>[]</code>).</p></li>
+<li><p>iterable.</p></li>
+<li><p><strong>mutable</strong>.</p></li>
+</ul>
+<p>Para crear sets, utilizamos llaves (<code>{}</code>).</p>
+<div id="9d68ea1e" class="cell" data-execution_count="34">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creando un set numérico:</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> {<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>}</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(s)</span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Creando otro set:</span></span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>frutas <span class="op">=</span> {<span class="st">'platano'</span>, <span class="st">'kiwi'</span>, <span class="st">'albaricoque'</span>}</span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(frutas)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{1, 2, 3}
+{'kiwi', 'platano', 'albaricoque'}</code></pre>
+</div>
+</div>
+<p><br></p>
+<p>Observa como al crear el set de <code>frutas</code> los valores se muestran en otro orden diferente al que hemos introducido. Automáticamente Python ordena los elementos de menor a mayor según su longitud. En este caso, número de caracteres.</p>
+<div id="1c4f9acd" class="cell" data-execution_count="35">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># La indexación en los set no se hace por posición, sino por pertenencia:</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">1</span> <span class="kw">in</span> s)   <span class="co"># True</span></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">45</span> <span class="kw">in</span> s)      <span class="co"># False</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>True
+False</code></pre>
+</div>
+</div>
+<p><br></p>
+<p>Aunque los objetos tipo <code>set</code> ocupan mucha memoria (más que las listas y las tuplas), son muy eficientes para identificar duplicados o elementos que se repiten en varios sets. De hecho, los set tienen un conjunto de métodos muy útiles para este tipo de operaciones. Observa algunos ejemplos en la siguiente figura.</p>
+<div id="fig-02_009" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-cap="Operaciones frecuentes de comparación entre sets." data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-02_009-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/fig_02_009.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%" data-fig-cap="Operaciones frecuentes de comparación entre sets.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-02_009-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Operaciones frecuentes de comparación entre sets.
+</figcaption>
+</figure>
+</div>
+<p><br></p>
+<p>Aquí tienes algunos de los métodos más frecuentes con sets:</p>
+<div id="4845ad25" class="cell" data-execution_count="36">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>set1.add(item) <span class="co">#Add item to set</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>set1.clear() <span class="co">#Reset to empty</span></span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>set1.copy() <span class="co">#Returns a shallow copy of a set</span></span>
+<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a>set1.difference(set2) <span class="co">#Return unshared items</span></span>
+<span id="cb59-8"><a href="#cb59-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-9"><a href="#cb59-9" aria-hidden="true" tabindex="-1"></a>set1.difference_update(set2) <span class="co">#Set set1 to items not in set2</span></span>
+<span id="cb59-10"><a href="#cb59-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-11"><a href="#cb59-11" aria-hidden="true" tabindex="-1"></a>set1.discard(item) <span class="co">#Removes selected item from a set</span></span>
+<span id="cb59-12"><a href="#cb59-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-13"><a href="#cb59-13" aria-hidden="true" tabindex="-1"></a>set1.intersection(set2) <span class="co">#Return all items in both sets</span></span>
+<span id="cb59-14"><a href="#cb59-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-15"><a href="#cb59-15" aria-hidden="true" tabindex="-1"></a>set1.intersection_update(set2) <span class="co">#Set set1 to intersecting items</span></span>
+<span id="cb59-16"><a href="#cb59-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-17"><a href="#cb59-17" aria-hidden="true" tabindex="-1"></a>set1.isdisjoint(set2) <span class="co">#Return True if no shared items</span></span>
+<span id="cb59-18"><a href="#cb59-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-19"><a href="#cb59-19" aria-hidden="true" tabindex="-1"></a>set1.issubset(set2) <span class="co">#Return True if set2 contains set1</span></span>
+<span id="cb59-20"><a href="#cb59-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-21"><a href="#cb59-21" aria-hidden="true" tabindex="-1"></a>set1.issuperset(set2) <span class="co">#Return True if set1 contains set2</span></span>
+<span id="cb59-22"><a href="#cb59-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-23"><a href="#cb59-23" aria-hidden="true" tabindex="-1"></a>set_name.pop() <span class="co">#Remove arbitrary element from a set</span></span>
+<span id="cb59-24"><a href="#cb59-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-25"><a href="#cb59-25" aria-hidden="true" tabindex="-1"></a>set_name.remove(item) <span class="co">#Remove an item from a set</span></span>
+<span id="cb59-26"><a href="#cb59-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-27"><a href="#cb59-27" aria-hidden="true" tabindex="-1"></a>set1.symmetric_difference(set2) <span class="co">#Return unshared set1 and set2 items</span></span>
+<span id="cb59-28"><a href="#cb59-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-29"><a href="#cb59-29" aria-hidden="true" tabindex="-1"></a>set1.symmetric_difference_update(set2) <span class="co">#Set set1 to unshared items</span></span>
+<span id="cb59-30"><a href="#cb59-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-31"><a href="#cb59-31" aria-hidden="true" tabindex="-1"></a>set1.union(set2) <span class="co">#Return all unique items in both</span></span>
+<span id="cb59-32"><a href="#cb59-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-33"><a href="#cb59-33" aria-hidden="true" tabindex="-1"></a>set1.update(set2) <span class="co">#Set set1 to unique set1 and set2 items</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><br></p>
+</section>
+<section id="diccionarios" class="level3" data-number="2.4">
+<h3 data-number="2.4" class="anchored" data-anchor-id="diccionarios"><span class="header-section-number">2.4</span> Diccionarios</h3>
+<p>Los diccionarios son una colección de valores ordenados, iterables y <strong>mutables</strong> que están indexados por “claves” en lugar de por posición.</p>
+<p>Para crear un diccionario, al igual que los sets, usamos las llaves <code>{}</code>. La diferencia es que para crear un diccionario, cada elemento debe estar compuesto por una pareja de una “clave” y un “valor” siguiendo la forma <code>'clave': 'valor'</code>. También podemos utilizar la función <code>dict()</code> para crear un diccionario. Observa el siguiente código:</p>
+<div id="6616e0f2" class="cell" data-execution_count="37">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creando dos diccionarios similares con distintos métodos:</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>dict1 <span class="op">=</span> {<span class="st">'bread'</span>: <span class="st">'good'</span>, <span class="st">'fire'</span>: <span class="st">'bad'</span>, <span class="st">'exam'</span>: <span class="st">'very bad'</span>}</span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(dict1)</span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>dict2 <span class="op">=</span> <span class="bu">dict</span>(bread<span class="op">=</span><span class="st">'good'</span>, fire<span class="op">=</span><span class="st">'bad'</span>, exam<span class="op">=</span><span class="st">'very bad'</span>)</span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(dict2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{'bread': 'good', 'fire': 'bad', 'exam': 'very bad'}
+{'bread': 'good', 'fire': 'bad', 'exam': 'very bad'}</code></pre>
+</div>
+</div>
+<p><br></p>
+<p>Esta forma de codificar los elementos, nos permite extraer todos los valores o todas las claves con los métodos <code>values()</code>y <code>keys()</code>, o ambas cosas por parejas con <code>items()</code>. También podemos extraer valores concretos por su nombre:</p>
+<div id="5b27a61e" class="cell" data-execution_count="38">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>dict1.values()</span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>dict1.keys()</span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>dict1.items()</span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>dict1[<span class="st">'exam'</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="105">
+<pre><code>'very bad'</code></pre>
+</div>
+</div>
+<p><br></p>
+<p>Esta forma de indexar la información es útil para crear tuplas, listas o sets de valores sobre los que operar.</p>
+<p>La siguiente figura muestra otros métodos de uso común en objetos tipo diccionario</p>
+<div id="fig-02_010" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-cap="Métodos frecuentes en diccionarios." data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-02_010-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/fig_02_010.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%" data-fig-cap="Métodos frecuentes en diccionarios.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-02_010-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Métodos frecuentes en diccionarios.
+</figcaption>
+</figure>
+</div>
+<p><br></p>
+<p>Entre los métodos anteriores, uno de los más usados es <code>update()</code> que permite añadir nuevas entradas a nuestro diccionario.</p>
+<div id="c947ae06" class="cell" data-execution_count="39">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>dict1.update({<span class="st">'my_dog'</span>: <span class="st">'excelent'</span>})</span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(dict1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{'bread': 'good', 'fire': 'bad', 'exam': 'very bad', 'my_dog': 'excelent'}</code></pre>
+</div>
+</div>
+<p><br></p>
+<p>Resulta interesante también la funcionalidad del operador <code>**</code> para combinar varios diccionarios. Echa un vistazo al siguiente código:</p>
+<div id="ad1b8ea7" class="cell" data-execution_count="40">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>d1 <span class="op">=</span> <span class="bu">dict</span>(Harry<span class="op">=</span><span class="st">'good'</span>, Draco<span class="op">=</span><span class="st">'bad'</span>)</span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>d2 <span class="op">=</span> <span class="bu">dict</span>(Hermione<span class="op">=</span><span class="st">'good'</span>, Tom<span class="op">=</span><span class="st">'bad'</span>)</span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>d3 <span class="op">=</span> <span class="bu">dict</span>(Ron<span class="op">=</span><span class="st">'good'</span>, Dolores<span class="op">=</span><span class="st">'bad'</span>)</span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>d4 <span class="op">=</span> {<span class="op">**</span>d1, <span class="op">**</span>d2, <span class="op">**</span>d3}</span>
+<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(d4)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{'Harry': 'good', 'Draco': 'bad', 'Hermione': 'good', 'Tom': 'bad', 'Ron': 'good', 'Dolores': 'bad'}</code></pre>
+</div>
+</div>
+<p><br></p>
+<p>Con estas notas hemos repasado los conceptos fundamentales sobre los tipos de datos y las principales estructuras (o contenedores) de datos de Python. La siguiente tabla sintetiza las características más importantes que tienes que saber de cada una y permite comparar sus principales diferencias:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 8%">
+<col style="width: 16%">
+<col style="width: 10%">
+<col style="width: 43%">
+<col style="width: 18%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Tipo</th>
+<th>Estructura de datos</th>
+<th>Mutabilidad</th>
+<th>Características principales</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Secuencia</td>
+<td>Tupla (<code>tuple</code>)</td>
+<td>Inmutable</td>
+<td>Rápida, eficiente y no modificable</td>
+<td><code>(2, 5, 'Pluto', 4.56)</code></td>
+</tr>
+<tr class="even">
+<td>Secuencia</td>
+<td>Lista (<code>list</code>)</td>
+<td>Mutable</td>
+<td>Flexible y con numerosas funciones integradas</td>
+<td><code>[2, 5, 'Pluto', 4.56]</code></td>
+</tr>
+<tr class="odd">
+<td>Conjunto</td>
+<td>Conjunto (<code>set</code>)</td>
+<td>Mutable</td>
+<td>No admite elementos duplicados y permite búsquedas rápidas</td>
+<td><code>{2, 5, 'Pluto', 4.56}</code></td>
+</tr>
+<tr class="even">
+<td>Mapeo</td>
+<td>Diccionario (<code>dict</code>)</td>
+<td>Mutable</td>
+<td>Asocia claves únicas con valores</td>
+<td><code>{'key': 'value'}</code></td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p>Recuerda que puedes profundizar en estos tipos de datos y estructuras de datos consultando la bibliografía y los recursos recomendados en la asignatura. En particular, los capítulos 7 y 9 del libro <a href="https://learning.oreilly.com/library/view/python-tools-for/9781098156688"><em>Python tools for scientist</em></a> de Lee Vaughan (2023) puede resultar de utilidad para profundizar conocimientos.</p>
+<p><br></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Minirreto 3</strong>. Operaciones de acceso y manipulación de estructuras de datos.</p>
+<p>Observa las siguientes estructuras de datos:</p>
+<div id="ea7dfc62" class="cell" data-execution_count="41">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb68"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> (<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">50</span>)</span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> (<span class="st">"Madrid"</span>, (<span class="dv">28001</span>, <span class="dv">28002</span>, <span class="dv">28003</span>), <span class="st">"España"</span>)</span>
+<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> [<span class="st">"Python"</span>, <span class="st">"R"</span>, <span class="st">"QGIS"</span>, <span class="st">"ArcGIS"</span>, <span class="st">"GeoPandas"</span>]</span>
+<span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-7"><a href="#cb68-7" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> {<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">50</span>}</span>
+<span id="cb68-8"><a href="#cb68-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-9"><a href="#cb68-9" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> {</span>
+<span id="cb68-10"><a href="#cb68-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"nombre"</span>: <span class="st">"Madrid"</span>,</span>
+<span id="cb68-11"><a href="#cb68-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"poblacion"</span>: <span class="dv">3420000</span>,</span>
+<span id="cb68-12"><a href="#cb68-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"superficie"</span>: <span class="fl">604.45</span>,</span>
+<span id="cb68-13"><a href="#cb68-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"provincias_vecinas"</span>: [<span class="st">"Toledo"</span>, <span class="st">"Guadalajara"</span>, <span class="st">"Segovia"</span>]</span>
+<span id="cb68-14"><a href="#cb68-14" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>¿Qué resultados obtendríamos de las siguientes operaciones?</strong> Antes de ejecutar el código, intenta razonar qué devuelve cada expresión y si alguna produce un error.</p>
+<p>Operación 1: x[-2]</p>
+<p>Operación 2: x[1:4]</p>
+<p>Operación 3: y[1][0]</p>
+<p>Operación 4: z[::-1]</p>
+<p>Operación 5: z[1:4:2]</p>
+<p>Operación 6: w[0]</p>
+<p>Operación 7: w[10]</p>
+<p>Operación 8: v[“nombre”]</p>
+<p>Operación 9: v[“provincias_vecinas”][1]</p>
+<p>Operación 10: v.get(“densidad”)</p>
+</div>
+</div>
+<p><small>Nota: podrás descifrar el resultado de estas operaciones en el test 2.1 de este tema.</small></p>
+<p><br></p>
+</section>
+</section>
+<section id="explorando-la-identidad-de-los-objetos-en-python" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="explorando-la-identidad-de-los-objetos-en-python"><span class="header-section-number">3</span> Explorando la identidad de los objetos en Python</h2>
+<p>Para terminar este primer notebook del tema 2, exploremos un poco más sobre cómo Python almacena la información con la que trabajamos. Al llegar hasta aquí, te habrás dado cuenta que Python encapsula los datos y los métodos que pueden operar sobre ellos en entidades nombrables conocidas como <strong>objetos</strong>. Todo en Python es un <code>objeto</code>, y cada <code>objeto</code> tiene una identidad, un tipo (<code>int</code>, <code>float</code>, <code>str</code>, etc.) y un valor. La identidad es un código que apunta a un espacio en la <em>memoria</em> del ordenador en el que se almacena la información. Así, el número 42 es un objeto al igual que la frase “Hola Mundo!”, cada uno de ellos con una identidad diferente. La identidad de un objeto y su tipo nunca cambian, pero su valor, como sabemos, a veces puede cambiar.</p>
+<p>Cuando realizamos una asignación en Python, por ejemplo <code>x = 5</code>, en realidad lo que hacemos es iniciar una variable a un objeto <code>x</code>, al que también le estamos otorgando una identidad. Este objeto es único entre todos los objetos existentes en el entorno. El comando <code>id</code> nos permite acceder y consultar esta identidad.</p>
+<div id="d7e12045" class="cell" data-execution_count="42">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb69"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a><span class="bu">id</span>(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="109">
+<pre><code>140709799048232</code></pre>
+</div>
+</div>
+<p><br></p>
+<p>Los objetos tipo tupla, lista, set o diccionario también tienen su propia identidad.</p>
+<div id="107a0bb0" class="cell" data-execution_count="43">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb71"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>tupla <span class="op">=</span> (<span class="dv">5</span>, <span class="st">'manzana'</span>, <span class="dv">33</span>)</span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"tupla id:"</span>, <span class="bu">id</span>(tupla))</span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a>lista <span class="op">=</span> (<span class="dv">22</span>, <span class="dv">15</span>, <span class="dv">7</span>)</span>
+<span id="cb71-5"><a href="#cb71-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"lista id:"</span>, <span class="bu">id</span>(lista))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tupla id: 1686348592512
+lista id: 1686409134912</code></pre>
+</div>
+</div>
+<p><br></p>
+<p>Ahora hagamos un pequeño ejercicio.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Ejercicio</strong>. Descubriendo la identidad de los objetos en Python.</p>
+<ol type="1">
+<li>Crea una variable x con un valor numérico determinado.</li>
+<li>Asigna x a otra variable y (copia el valor de x en otra variable).</li>
+<li>Comprueba la identidad de los objetos x e y. ¿Ambos objetos tienen la misma identidad?</li>
+<li>Ahora reasigna x a otro valor numérico diferente.</li>
+<li>Vuelve a comprobar la identidad de x. ¿Ha cambiado la identidad de x con respecto a la original?</li>
+<li>Ahora comprueba el valor de y. Comprueba también su identidad. ¿Ha habido cambios en y?</li>
+</ol>
+</div>
+</div>
+<p><br></p>
+<p>Ejemplo de solución:</p>
+<div id="540af9db" class="cell" data-execution_count="44">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb73"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Crea una variable x con un valor numérico determinado.</span></span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"x="</span>, x)</span>
+<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Asigna x a otra variable y (copia el valor de x en otra variable).</span></span>
+<span id="cb73-6"><a href="#cb73-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> x</span>
+<span id="cb73-7"><a href="#cb73-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"y="</span>, y)</span>
+<span id="cb73-8"><a href="#cb73-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-9"><a href="#cb73-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. comprueba la identidad de los objetos x e y.</span></span>
+<span id="cb73-10"><a href="#cb73-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Identidad de x:"</span>, <span class="bu">id</span>(x))</span>
+<span id="cb73-11"><a href="#cb73-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Identidad de y:"</span>,<span class="bu">id</span>(y))</span>
+<span id="cb73-12"><a href="#cb73-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-13"><a href="#cb73-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Ahora reasigna x a otro valor numérico diferente.</span></span>
+<span id="cb73-14"><a href="#cb73-14" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb73-15"><a href="#cb73-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"x="</span>, x, <span class="st">"--&gt; nuevo valor de x"</span>)</span>
+<span id="cb73-16"><a href="#cb73-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-17"><a href="#cb73-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Vuelve a comprobar la identidad de x.</span></span>
+<span id="cb73-18"><a href="#cb73-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">id</span>(x), <span class="st">"--&gt; nueva identidad de x"</span>) <span class="co"># Si, ha cambiado la identidad.</span></span>
+<span id="cb73-19"><a href="#cb73-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-20"><a href="#cb73-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Ahora comprueba el valor e identidad de y.</span></span>
+<span id="cb73-21"><a href="#cb73-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Valor de y:"</span>, y, <span class="st">"; Identidad de y:"</span>, <span class="bu">id</span>(y)) <span class="co"># No, no ha habido cambios en y ni en su identidad.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>x= 5
+y= 5
+Identidad de x: 140709799048232
+Identidad de y: 140709799048232
+x= 3 --&gt; nuevo valor de x
+140709799048168 --&gt; nueva identidad de x
+Valor de y: 5 ; Identidad de y: 140709799048232</code></pre>
+</div>
+</div>
+<p><br></p>
+<p>En este ejericio, acabamos de descubrir lo que en programación se llama <strong>Aliasing</strong>. Ocurre cuando dos variables (x e y) apuntan al mismo objeto en la memoria de nuestro ordenador. Al definir la variable <code>y</code> con el mismo valor que <code>x</code> Python interpreta que ambos objetos son el mismo. De este modo, las <strong>variables</strong> pueden ser definidas como una etiqueta concreta para un objeto. Al igual que las personas pueden tener múltiples etiquetas (nombres, formales, informales, motes, etc.), un objeto en Python también puede ser conocido por múltiples variables (x e y, en este caso hasta el paso 3 de nuestro ejercicio). Esta forma de trabajar en Python es una ventaja porque permite ahorrar espacio en la memoria del ordenador.</p>
+<p><br></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Diferencia entre objeto y variable</strong></p>
+<p>Revisita los contenidos del Tema 1, donde hablábamos de las diferencias entre “objeto” y “variable”, ejemplificado en el caso de Fran (objeto), una persona (clase) que tomaba diferentes nombres (variables) en función de la situación (su nombre en el DNI, su mote en el trabajo, y el apelativo cariñoso de su pareja). En el ejemplo anterior, el mismo objeto (5) podía tomar variables (nombres) diferentes (x o y).</p>
+</div>
+</div>
+<p><br></p>
+<p>Si no estamos seguros de que dos objetos son el mismo, podemos utilizar los operadores <code>==</code> o <code>is</code>.</p>
+<div id="2280ccb6" class="cell" data-execution_count="45">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb75"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>a  <span class="op">=</span> <span class="dv">6</span> </span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="dv">6</span> </span>
+<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a>a <span class="op">==</span> b</span>
+<span id="cb75-6"><a href="#cb75-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-7"><a href="#cb75-7" aria-hidden="true" tabindex="-1"></a><span class="bu">id</span>(a)</span>
+<span id="cb75-8"><a href="#cb75-8" aria-hidden="true" tabindex="-1"></a><span class="bu">id</span>(b)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="112">
+<pre><code>140709799048264</code></pre>
+</div>
+</div>
+<p><br></p>
+<p>Tenemos que tener en cuenta que en el ejercicio anterior hemos trabajado con objetos tipo <code>int</code>, que son objetos <strong>inmutables</strong>. Pero, ¿qué pasaría si trabajásemos con un objeto <strong>mutable</strong>, como una lista, un set o un diccionario? Hagamos la prueba.</p>
+<p><br></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Ejercicio</strong>. Descubriendo la identidad de los objetos en Python II: aliasing y objetos mutables.</p>
+<ol type="1">
+<li>Crea una lista “a” con una serie de valores determinados.</li>
+<li>Asigna “a” a otra lista “b”.</li>
+<li>Comprueba la identidad de los objetos “a” y “b”. ¿Ambos objetos tienen la misma identidad?</li>
+<li>Modifica la lista “b” añadiendo un nuevo elemento utilizando el método <code>append</code>.</li>
+<li>Ahora imprime los valores de “a” y “b” y comprueba la identidad de ambos objetos. ¿Ha cambiado algo?</li>
+</ol>
+</div>
+</div>
+<p><br></p>
+<p>Ejemplo de solución:</p>
+<div id="5b94ff2b" class="cell" data-execution_count="46">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb77"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Crea una lista "a" con una serie de valores determinados..</span></span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> [<span class="dv">7</span>, <span class="dv">5</span>, <span class="dv">9</span>]</span>
+<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"a="</span>, a)</span>
+<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-5"><a href="#cb77-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Asigna "a" a otra lista "b".</span></span>
+<span id="cb77-6"><a href="#cb77-6" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> a</span>
+<span id="cb77-7"><a href="#cb77-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"b="</span>, b)</span>
+<span id="cb77-8"><a href="#cb77-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-9"><a href="#cb77-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 3.Comprueba la identidad de los objetos "a" y "b".</span></span>
+<span id="cb77-10"><a href="#cb77-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Identidad de a:"</span>, <span class="bu">id</span>(a))</span>
+<span id="cb77-11"><a href="#cb77-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Identidad de b:"</span>,<span class="bu">id</span>(b))</span>
+<span id="cb77-12"><a href="#cb77-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-13"><a href="#cb77-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Modifica la lista "b" añadiendo un nuevo elemento utilizando el método `append`.</span></span>
+<span id="cb77-14"><a href="#cb77-14" aria-hidden="true" tabindex="-1"></a>b.append(<span class="dv">3</span>)</span>
+<span id="cb77-15"><a href="#cb77-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-16"><a href="#cb77-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-17"><a href="#cb77-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Ahora imprime los valores de "a" y "b" y comprueba la identidad de ambos objetos.</span></span>
+<span id="cb77-18"><a href="#cb77-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"b="</span>, b, <span class="st">"--&gt; lista b actualizada con append"</span>)</span>
+<span id="cb77-19"><a href="#cb77-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"a="</span>, a, <span class="st">"--&gt; lista a"</span>) <span class="co"># Ojo, también ha cambiado al cambiar b!</span></span>
+<span id="cb77-20"><a href="#cb77-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-21"><a href="#cb77-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">id</span>(a), <span class="st">"--&gt; identidad de a"</span>) </span>
+<span id="cb77-22"><a href="#cb77-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">id</span>(b), <span class="st">"--&gt; identidad de b"</span>) <span class="co"># No ha cambiado la identidad!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>a= [7, 5, 9]
+b= [7, 5, 9]
+Identidad de a: 1686409291200
+Identidad de b: 1686409291200
+b= [7, 5, 9, 3] --&gt; lista b actualizada con append
+a= [7, 5, 9, 3] --&gt; lista a
+1686409291200 --&gt; identidad de a
+1686409291200 --&gt; identidad de b</code></pre>
+</div>
+</div>
+<p><br></p>
+<p>Este segundo ejercicio demuestra que si tenemos dos variables (a y b) que apuntan al mismo objeto, y ese objeto es mutable (una lista, un set o un diccionario), al cambiar el valor de una variable (a) se cambia también indirectamente el valor de la variable (b). Es por ello, por lo que debemos tener cuidado con el <strong>Aliasing</strong> en objetos mutables.</p>
+<p>La siguiente tabla puede ayudarte a recordar cuáles son los objetos mutables en Python:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 8%">
+<col style="width: 70%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Tipo</th>
+<th>¿Mutable?</th>
+<th>¿Es posible el aliasing?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>list</code>, <code>dict</code>, <code>set</code></td>
+<td>Sí</td>
+<td>Sí. Dos variables pueden apuntar al mismo objeto y los cambios realizados a través de una afectan a la otra.</td>
+</tr>
+<tr class="even">
+<td><code>int</code>, <code>float</code>, <code>str</code>, <code>tuple</code></td>
+<td>No</td>
+<td>No de forma directa: los objetos son inmutables, por lo que no pueden modificarse.</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p>Para evitar el problema del <strong>Aliasing</strong> con objetos mutables debemos <strong>clonar</strong> el objeto (“shallow copy”, en inglés), no sólo asignarlo. Para ello, podemos usar el método <code>copy()</code>, presentado anteriormente como uno de los métodos posibles para listas, sets y diccionarios.</p>
+<p><br></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Ejercicio</strong>. Descubriendo la identidad de los objetos en Python III: clonando objetos.</p>
+<ol type="1">
+<li>Crea una lista “a” con una serie de valores determinados.</li>
+<li>Clona “a” a otra lista “b” usando <code>copy</code>.</li>
+<li>Comprueba la identidad de los objetos “a” y “b”. ¿Ambos objetos tienen la misma identidad?</li>
+<li>Modifica la lista “b” añadiendo un nuevo elemento utilizando el método <code>append</code>.</li>
+<li>Ahora imprime los valores de “a” y “b” y comprueba la identidad de ambos objetos. ¿Ha cambiado algo?</li>
+</ol>
+</div>
+</div>
+<p><br></p>
+<p>Ejemplo de solución:</p>
+<div id="c91507a6" class="cell" data-execution_count="47">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb79"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Crea una lista "a" con una serie de valores determinados..</span></span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> [<span class="dv">7</span>, <span class="dv">5</span>, <span class="dv">9</span>]</span>
+<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"a="</span>, a)</span>
+<span id="cb79-4"><a href="#cb79-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-5"><a href="#cb79-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Clona "a" a otra lista "b" usando `copy`.</span></span>
+<span id="cb79-6"><a href="#cb79-6" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> a.copy()</span>
+<span id="cb79-7"><a href="#cb79-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"b="</span>, b)</span>
+<span id="cb79-8"><a href="#cb79-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-9"><a href="#cb79-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 3.Comprueba la identidad de los objetos "a" y "b".</span></span>
+<span id="cb79-10"><a href="#cb79-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Identidad de a:"</span>, <span class="bu">id</span>(a))</span>
+<span id="cb79-11"><a href="#cb79-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Identidad de b:"</span>,<span class="bu">id</span>(b))</span>
+<span id="cb79-12"><a href="#cb79-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-13"><a href="#cb79-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Modifica la lista "b" añadiendo un nuevo elemento utilizando el método `append`.</span></span>
+<span id="cb79-14"><a href="#cb79-14" aria-hidden="true" tabindex="-1"></a>b.append(<span class="dv">3</span>)</span>
+<span id="cb79-15"><a href="#cb79-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-16"><a href="#cb79-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-17"><a href="#cb79-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Ahora imprime los valores de "a" y "b" y comprueba la identidad de ambos objetos.</span></span>
+<span id="cb79-18"><a href="#cb79-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"b="</span>, b, <span class="st">"--&gt; lista b actualizada con append"</span>)</span>
+<span id="cb79-19"><a href="#cb79-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"a="</span>, a, <span class="st">"--&gt; lista a"</span>) <span class="co"># Ojo, también ha cambiado al cambiar b!</span></span>
+<span id="cb79-20"><a href="#cb79-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-21"><a href="#cb79-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">id</span>(a), <span class="st">"--&gt; identidad de a"</span>) </span>
+<span id="cb79-22"><a href="#cb79-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">id</span>(b), <span class="st">"--&gt; identidad de b"</span>) <span class="co"># No ha cambiado la identidad!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>a= [7, 5, 9]
+b= [7, 5, 9]
+Identidad de a: 1686348811648
+Identidad de b: 1686348810880
+b= [7, 5, 9, 3] --&gt; lista b actualizada con append
+a= [7, 5, 9] --&gt; lista a
+1686348811648 --&gt; identidad de a
+1686348810880 --&gt; identidad de b</code></pre>
+</div>
+</div>
+<p><br></p>
+<p>Como puedes ver en este último ejemplo, el objeto clonado (b) se crea con una nueva identidad, es decir, es un objeto diferente al original (a), almacenado en otro espacio en la memoria.</p>
+<p>Ahora que ya has llegado hasta aquí, ya conoces los fundamentos de los tipos de datos y las principales estructuras de datos de Python. Es el momento de poner a prueba lo aprendido.</p>
+<p><br></p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Completa el Test 2.1</strong> para comprobar cuánto has aprendido y afianzar los conceptos trabajados en este apartado. ¡A por ello!</p>
+</div>
+</div>
+<p><br></p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
