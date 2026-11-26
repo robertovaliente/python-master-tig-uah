@@ -450,7 +450,7 @@ t2 = (1, (2, 3), (4, 5, (6, 7))) # Tupla anidada
 
 Observa como al ejecutar el fragmento de código anterior aparecen dos nuevos objetos en el explorador de variables. El objeto `tupla` tiene 3 elementos, todos ellos de tipo `int`. El objeto `t2` es una tupla anidada. También tiene 3 elementos pero en este caso, el primero es un número entero y los otros dos son tuplas en sí mismas. Fíjate que Spyder permite abrir la tupla para inspeccionar los valores haciendo doble clic sobre el nombre del objeto en el explorador de variables.
 
-![Captura de pantalla del objeto t2.](images/fig_02_005.png){#fig-02_005 fig-cap="Captura de pantalla del objeto t2." fig-align="center" width="70%"}
+![Captura de pantalla del objeto t2.](images/fig_02_005.png){#fig-02_005 fig-cap="Captura de pantalla del objeto t2." fig-align="center" width="50%"}
 
 <br>
 
@@ -785,7 +785,7 @@ Esta forma de indexar la información es útil para crear tuplas, listas o sets 
 
 La siguiente figura muestra otros métodos de uso común en objetos tipo diccionario
 
-![Métodos frecuentes en diccionarios.](images/fig_02_010.png){#fig-02_010 fig-cap="Métodos frecuentes en diccionarios." fig-align="center" width="50%"}
+![Métodos frecuentes en diccionarios.](images/fig_02_010.png){#fig-02_010 fig-cap="Métodos frecuentes en diccionarios." fig-align="center" width="30%"}
 
 <br>
 
