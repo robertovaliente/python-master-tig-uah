@@ -450,10 +450,6 @@ t2 = (1, (2, 3), (4, 5, (6, 7))) # Tupla anidada
 
 Observa como al ejecutar el fragmento de código anterior aparecen dos nuevos objetos en el explorador de variables. El objeto `tupla` tiene 3 elementos, todos ellos de tipo `int`. El objeto `t2` es una tupla anidada. También tiene 3 elementos pero en este caso, el primero es un número entero y los otros dos son tuplas en sí mismas. Fíjate que Spyder permite abrir la tupla para inspeccionar los valores haciendo doble clic sobre el nombre del objeto en el explorador de variables.
 
-![Captura de pantalla del objeto t2.](images/fig_02_005.PNG){#fig-02_005 fig-cap="Captura de pantalla del objeto t2." fig-align="center" width="70%"}
-
-<br>
-
 Los elementos de una tupla también pueden asignarse a objetos individuales:
 
 ```{python}
@@ -783,9 +779,33 @@ dict1['exam']
 
 Esta forma de indexar la información es útil para crear tuplas, listas o sets de valores sobre los que operar.
 
-La siguiente figura muestra otros métodos de uso común en objetos tipo diccionario
+El siguiente fragmento de código muestra otros métodos de uso común en objetos tipo diccionario:
 
-![Métodos frecuentes en diccionarios.](images/fig_02_010.PNG){#fig-02_010 fig-cap="Métodos frecuentes en diccionarios." fig-align="center" width="50%"}
+```{python}
+#| eval: false
+
+clear() #Remove all dictionary elements
+
+copy() #Return a copy of a dictionary
+
+fromkeys() #Return a dictionary with the specified keys and a value
+
+get() #Return the value of a specified key
+
+items() #Return a tuple of all key-value pairs
+
+keys() #Return a list of a dictionary’s keys
+
+pop() #Remove the element with specified key
+
+popitem() #Remove the last inserted key-value pair
+
+setdefault() #Insert specified key and value if no key, else return value if key exists
+
+update() #Update dictionary with specified key-value
+
+values() #Return a list of the values in a dictionary
+```
 
 <br>
 
